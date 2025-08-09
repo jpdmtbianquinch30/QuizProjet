@@ -1,0 +1,26 @@
+<h2>Inscription</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label>Nom complet :</label>
+  <input type="text" formControlName="nomComplet"><br /><br />
+
+  <label>Email :</label>
+  <input type="email" formControlName="email"><br /><br />
+
+  <label>Mot de passe :</label>
+  <input type="password" formControlName="motDePasse"><br /><br />
+
+  <label>Rôle :</label>
+  <select formControlName="role">
+    <option value="EMPLOYE">Employé</option>
+    <option value="MANAGER">Manager</option>
+    <option value="ADMIN">Admin</option>
+  </select><br /><br />
+
+  <button type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
+
+  <!-- ✅ Lien vers la page de connexion -->
+  <p style="margin-top: 15px;">
+    Déjà inscrit ?
+    <a routerLink="/login">Se connecter</a>
+  </p>
+</form>

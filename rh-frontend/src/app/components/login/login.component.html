@@ -1,0 +1,23 @@
+<h2>Connexion</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email :</label><br />
+    <input type="email" id="email" formControlName="email" />
+  </div>
+
+  <div style="margin-top: 10px;">
+    <label for="password">Mot de passe :</label><br />
+    <input type="password" id="password" formControlName="motDePasse" />
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid" style="margin-top: 15px;">
+    Se connecter
+  </button>
+
+  <!-- ✅ Lien vers l'inscription -->
+  <p style="margin-top: 15px;">
+  Pas encore inscrit ? <a routerLink="/register">Créer un compte</a>
+  <a routerLink="/forgot-password" style="margin-left: 10px;">Mot de passe oublié ?</a>
+</p>
+
+</form>
