@@ -1,0 +1,32 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6439
+    [34mall[39m: [
+      [34;4mApp\Models\Employee[39;24m {#6016
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: "[32mAli[39m",
+        [34memail[39m: "[32mali@example.com[39m",
+        [34mcreated_at[39m: "[32m2025-08-21 21:27:27[39m",
+        [34mupdated_at[39m: "[32m2025-08-21 21:27:27[39m",
+        [34mplannings[39m: [34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6451
+          [34mall[39m: [
+            [34;4mApp\Models\Planning[39;24m {#6432
+              [34mid[39m: [35m1[39m,
+              [34mname[39m: "[32mShift Matin[39m",
+              [34mwork_date[39m: "[32m2025-08-22[39m",
+              [34mstart_time[39m: "[32m08:00:00[39m",
+              [34mend_time[39m: "[32m14:00:00[39m",
+              [34mnotes[39m: "[32mTravail à la réception[39m",
+              [34mcreated_at[39m: "[32m2025-08-21 21:27:42[39m",
+              [34mupdated_at[39m: "[32m2025-08-21 21:27:42[39m",
+              [34mpivot[39m: [34;4mIlluminate\Database\Eloquent\Relations\Pivot[39;24m {#6433
+                [34memployee_id[39m: [35m1[39m,
+                [34mplanning_id[39m: [35m1[39m,
+                [34mcreated_at[39m: "[32m2025-08-21 21:27:54[39m",
+                [34mupdated_at[39m: "[32m2025-08-21 21:27:54[39m",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  }
+

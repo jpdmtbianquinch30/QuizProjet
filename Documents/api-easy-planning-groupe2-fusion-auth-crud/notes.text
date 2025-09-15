@@ -1,0 +1,138 @@
+Tuto des requetes Eloquent equivalent à SQL et leurs roles :
+
+| **Méthode Eloquent**                              | **Équivalent SQL**                             | **Rôle / Utilité**                         |
+| ------------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
+| `all()`                                           | `SELECT * FROM table;`                         | Récupère tous les enregistrements.         |
+| `find($id)`                                       | `SELECT * FROM table WHERE id = $id LIMIT 1;`  | Récupère une ligne par son ID.             |
+| `findOrFail($id)`                                 | idem que `find` mais si pas trouvé → exception | Sécurise la recherche par ID.              |
+| `first()`                                         | `SELECT * FROM table ORDER BY id ASC LIMIT 1;` | Récupère la **première ligne**.            |
+| `firstOrFail()`                                   | idem que `first` mais exception si vide        | Sécurise le `first()`.                     |
+| `get()`                                           | `SELECT * FROM table WHERE ...;`               | Récupère tous les résultats correspondant. |
+| `pluck('colonne')`                                | `SELECT colonne FROM table;`                   | Récupère seulement une colonne.            |
+| `count()`                                         | `SELECT COUNT(*) FROM table WHERE ...;`        | Compte le nombre de résultats.             |
+| `sum('colonne')`                                  | `SELECT SUM(colonne) FROM table;`              | Fait la somme d’une colonne.               |
+| `avg('colonne')`                                  | `SELECT AVG(colonne) FROM table;`              | Moyenne d’une colonne.                     |
+| `max('colonne')`                                  | `SELECT MAX(colonne) FROM table;`              | Plus grande valeur d’une colonne.          |
+| `min('colonne')`                                  | `SELECT MIN(colonne) FROM table;`              | Plus petite valeur d’une colonne.          |
+| `where('col', '=', $val)`                         | `WHERE col = $val`                             | Filtre simple.                             |
+| `where('col', '>', $val)`                         | `WHERE col > $val`                             | Filtre avec condition.                     |
+| `orWhere('col', '=', $val)`                       | `... OR col = $val`                            | Ajoute un `OR`.                            |
+| `whereBetween('col', [$min, $max])`               | `WHERE col BETWEEN $min AND $max`              | Vérifie une valeur dans un intervalle.     |
+| `whereIn('col', [a,b,c])`                         | `WHERE col IN (a,b,c)`                         | Vérifie si une valeur est dans une liste.  |
+| `whereNotIn('col', [a,b,c])`                      | `WHERE col NOT IN (a,b,c)`                     | Exclut une liste de valeurs.               |
+| `whereNull('col')`                                | `WHERE col IS NULL`                            | Vérifie si c’est NULL.                     |
+| `whereNotNull('col')`                             | `WHERE col IS NOT NULL`                        | Vérifie si non NULL.                       |
+| `orderBy('col', 'asc')`                           | `ORDER BY col ASC`                             | Trie croissant.                            |
+| `orderBy('col', 'desc')`                          | `ORDER BY col DESC`                            | Trie décroissant.                          |
+| `limit($n)`                                       | `LIMIT $n`                                     | Limite le nombre de résultats.             |
+| `offset($n)`                                      | `OFFSET $n`                                    | Décale les résultats.                      |
+| `skip($n)`                                        | `OFFSET $n`                                    | Même que `offset`.                         |
+| `take($n)`                                        | `LIMIT $n`                                     | Même que `limit`.                          |
+| `paginate($n)`                                    | `LIMIT $n OFFSET x` + total count              | Pagination automatique.                    |
+| `join('table2', 'table1.col', '=', 'table2.col')` | `INNER JOIN table2 ON table1.col = table2.col` | Jointure interne.                          |
+| `leftJoin('table2', ...)`                         | `LEFT JOIN table2 ON ...`                      | Jointure gauche.                           |
+| `rightJoin('table2', ...)`                        | `RIGHT JOIN table2 ON ...`                     | Jointure droite.                           |
+| `whereHas('relation', fn)`                        | `WHERE EXISTS (SELECT ... FROM relation ...)`  | Filtre en fonction d’une relation.         |
+| `with('relation')`                                | `LEFT JOIN relation ...` (mais optimisé)       | Charge les relations (eager loading).      |
+| `create([...])`                                   | `INSERT INTO table (col1,col2) VALUES (...);`  | Crée une nouvelle ligne.                   |
+| `insert([...])`                                   | `INSERT INTO table (col1,col2) VALUES (...);`  | Insertion directe (pas d’objets Eloquent). |
+| `update([...])`                                   | `UPDATE table SET col=val WHERE ...;`          | Met à jour une ou plusieurs lignes.        |
+| `delete()`                                        | `DELETE FROM table WHERE ...;`                 | Supprime les résultats.                    |
+| `destroy($id)`                                    | `DELETE FROM table WHERE id = $id;`            | Supprime par ID.                           |
+| `truncate()`                                      | `TRUNCATE TABLE table;`                        | Vide complètement une table.               |
+| `exists()`                                        | `SELECT 1 FROM table WHERE ... LIMIT 1;`       | Vérifie si un enregistrement existe.       |
+| `doesntExist()`                                   | Vérifie l’inverse                              | Vérifie qu’aucun enregistrement n’existe.  |
+
+
+1. Pour creer une table ça sera avec : php artisan make:model Planning -m (planning) etant le nom de la table et aussi elle sera utiliser entant qu'objet dans le code.
+2. Pour creer une table pivot entre deux tables, on utilise la commande : php artisan make:migration create_employee_planning_table --create=employee_planning (employee_planning) etant le nom de la table pivot.
+3. Après avoir créé la migration, il faut définir les colonnes de la table dans la méthode up() de la migration.
+4. Pour appliquer les migrations (rendre utilisable dans la base de données), on utilise la commande : php artisan migrate.
+5. 📌 La table pivot employee_planning
+
+La table pivot employee_planning est une table intermédiaire qui sert à gérer la relation many-to-many (plusieurs à plusieurs) entre les employés et les plannings.
+
+👉 Pourquoi ?
+
+Un employé peut être assigné à plusieurs plannings (ex : lundi matin, mardi soir, etc.).
+
+Un planning peut concerner plusieurs employés (ex : lundi matin → 3 employés différents).
+
+Sans table pivot, on serait limité à assigner un seul employé par planning, ce qui n’est pas adapté.
+
+👉 Fonctionnement :
+
+La table employees contient les informations des employés.
+
+La table plannings contient les informations des plannings.
+
+La table employee_planning fait le lien entre les deux en stockant uniquement les identifiants :
+
+employee_id → référence un employé
+
+planning_id → référence un planning
+
+👉 Exemple d’utilisation :
+
+employee_id = 1, planning_id = 1 → l’employé 1 travaille dans le planning 1
+
+employee_id = 2, planning_id = 1 → l’employé 2 travaille aussi dans le planning 1
+
+employee_id = 2, planning_id = 2 → l’employé 2 travaille aussi dans le planning 2
+
+Ainsi, cette table permet d’assigner plusieurs employés à plusieurs plannings de manière flexible et évolutive.
+6. Pour tester dans tinker : php artisan tinker
+7. Pour créer un controller pour les tests : php artisan make:controller TestController puis on se rends dans routes api.php
+8.Différence entre web.php et api.php
+Si je veux tester dans Postman → mets ça dans routes/api.php (les URLs seront préfixées par /api, ex: http://127.0.0.1:8000/api/employees).
+Si je mets dans web.php, les routes seront accessibles directement (http://127.0.0.1:8000/employees), mais ce n’est pas "API style".
+
+9. Pour faire un crud en laravel voici les methode a utiliser :
+    | Action       | Méthode Eloquent           | Notes                                     |
+    | ------------ | -------------------------- | ----------------------------------------- |
+    | Création     | `create()`                 | Nécessite `$fillable`                     |
+    | Lecture      | `all()`, `get()`, `find()` | `with()` pour relations                   |
+    | Modification | `update()`                 | Peut utiliser `??` pour garder valeurs    |
+    | Suppression  | `delete()`                 | `detach()` avant pour les relations pivot |
+Pour la validation des données, on utilise la méthode validate() disponible dans les controllers Laravel. Elle permet de définir des règles de validation pour les champs attendus dans la requête. Par exemple :
+public function createPlanning(Request $request)
+{
+    // Validation des données reçues
+    $validateData = $request->validate([
+        les données a valider
+    ]);
+
+    Après cette ligne, si les données sont invalides, Laravel renvoie automatiquement une erreur 422 si elles sont valides, $validateData contient les valeurs filtrées
+}
+
+10. Maintenant le cache pour les appel api ett pour l'activé c'est dans .env puis on importe le cache dans le controller avec use Illuminate\Support\Facades\Cache; et pour l'utiliser c'est Cache::remember('nom_cache', durée_en_minutes, function() { return ...; });
+etape 1: On met en cache les lecteures ex: Cache::remember('employees.index', now()->addMinutes(10), function () {
+    return Employee::with('plannings')->get();
+});
+etape 2: On vide le cache a chaque modification (création, mise à jour, suppression) ex: Cache::forget('employees.index');
+etape 3: Puis on appel aux bon endroits ex : createPlanning etc... car on veut s'assurer que les données en cache sont à jour avec $this->bustPlanningCaches();
+11. Pour partir sur du formRequest pour la validation et message personnalisé, on peut créer une classe de FormRequest :
+On lance :
+php artisan make:request StoreEmployeeRequest
+php artisan make:request StorePlanningRequest
+php artisan make:request UpdatePlanningRequest
+php artisan make:request AssignEmployeeRequest
+php artisan make:request RemoveEmployeesRequest
+Les fichiers sont crées dans app/Http/Requests
+Puis on remplie chaque fichier avec les règles de validation et les messages personnalisés.
+12. Pour faire des tests de feature on organise dans tests/Feature ou tests/Unit puis on creer le fichier de test avec la commande :
+php artisan make:test NomDuTest --feature
+et dans ceci on va test la creation d'employer avec la methode test sur une BDD fictif different du BDD original
+explication pas à pas :
+use RefreshDatabase;
+On utilise une BDD propre pour chaque test, ça ne touche pas ma vraie base de données.
+$this->postJson('/api/employees', $data);
+Simule un POST vers mon endpoint /api/employees avec les données JSON.
+$response->assertStatus(201)
+Vérifie que la réponse HTTP est 201 (création OK).
+assertJsonFragment(['name' => 'John Doe'])
+Vérifie que la réponse contient bien le nom de l’employé créé.
+$this->assertDatabaseHas('employees', ['email' => 'john@example.com'])
+Vérifie que l’employé est bien enregistré en BDD.
+
+
