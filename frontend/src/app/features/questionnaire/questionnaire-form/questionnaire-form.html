@@ -1,0 +1,124 @@
+<div class="container">
+
+  <div class="header">
+    <h1>{{ isModification ? 'Modifier le questionnaire' : 'Nouveau questionnaire' }}</h1>
+    <button class="btn-annuler" (click)="annuler()">← Retour</button>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+  @if (succes) {
+    <div class="succes">{{ succes }}</div>
+  }
+
+  <div class="card">
+    <h2>Informations générales</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Titre *</label>
+        <input type="text" [(ngModel)]="questionnaire.titre"
+               placeholder="Ex: Quiz Java Fondamentaux" />
+      </div>
+      <div class="form-group">
+        <label>Thème *</label>
+        <input type="text" [(ngModel)]="questionnaire.theme"
+               placeholder="Ex: Java, Python, Web..." />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="questionnaire.description"
+                placeholder="Description du questionnaire..."
+                rows="3"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Durée (secondes) *</label>
+        <input type="number" [(ngModel)]="questionnaire.dureeSecondes" min="30" />
+      </div>
+      <div class="form-group">
+        <label>Statut</label>
+        <select [(ngModel)]="questionnaire.statut">
+          <option value="BROUILLON">Brouillon</option>
+          <option value="PUBLIE">Publié</option>
+          <option value="ARCHIVE">Archivé</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="questions-header">
+      <h2>Questions ({{ questionnaire.questions.length }})</h2>
+      <button class="btn-ajouter" (click)="ajouterQuestion()">
+        + Ajouter une question
+      </button>
+    </div>
+
+    <div *ngFor="let question of questionnaire.questions; let i = index"
+         class="question-card">
+
+      <div class="question-header">
+        <span class="question-numero">Question {{ i + 1 }}</span>
+        <button class="btn-supprimer-q" (click)="supprimerQuestion(i)"
+                *ngIf="questionnaire.questions.length > 1">
+          Supprimer
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label>Contenu *</label>
+        <textarea [(ngModel)]="question.contenu"
+                  placeholder="Entrez votre question..."
+                  rows="2"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Points</label>
+          <input type="number" [(ngModel)]="question.points" min="1" />
+        </div>
+        <div class="form-group">
+          <label>Bonne réponse</label>
+          <select [(ngModel)]="question.bonneReponseIndex">
+            <option [value]="0">Choix A</option>
+            <option [value]="1">Choix B</option>
+            <option [value]="2">Choix C</option>
+            <option [value]="3">Choix D</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="choix-grid">
+        <div class="choix-item" [class.correct]="question.bonneReponseIndex === 0">
+          <span class="choix-label">A</span>
+          <input type="text" [(ngModel)]="question.choix[0]" placeholder="Choix A" />
+        </div>
+        <div class="choix-item" [class.correct]="question.bonneReponseIndex === 1">
+          <span class="choix-label">B</span>
+          <input type="text" [(ngModel)]="question.choix[1]" placeholder="Choix B" />
+        </div>
+        <div class="choix-item" [class.correct]="question.bonneReponseIndex === 2">
+          <span class="choix-label">C</span>
+          <input type="text" [(ngModel)]="question.choix[2]" placeholder="Choix C" />
+        </div>
+        <div class="choix-item" [class.correct]="question.bonneReponseIndex === 3">
+          <span class="choix-label">D</span>
+          <input type="text" [(ngModel)]="question.choix[3]" placeholder="Choix D" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn-annuler" (click)="annuler()">Annuler</button>
+    <button class="btn-primary" (click)="sauvegarder()" [disabled]="chargement">
+      {{ chargement ? 'Sauvegarde...' : (isModification ? 'Modifier' : 'Créer') }}
+    </button>
+  </div>
+
+</div>
