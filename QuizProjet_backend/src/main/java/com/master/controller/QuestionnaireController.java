@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,24 +26,40 @@ public class QuestionnaireController {
 
     // POST /api/questionnaires
     @PostMapping
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
     public ResponseEntity<QuestionnaireResponse> creer(
             @Valid @RequestBody QuestionnaireRequest request,
             Authentication authentication) {
 
-        User admin = userService.findByEmail(authentication.getName());
+        User evaluateur = userService.findByEmail(authentication.getName());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(questionnaireService.creer(request, admin));
+                .body(questionnaireService.creer(request, evaluateur));
     }
 
-    // GET /api/questionnaires
+    // GET /api/questionnaires — chaque évaluateur voit ses propres questionnaires
     @GetMapping
-    public ResponseEntity<List<QuestionnaireResponse>> listerTous() {
-        return ResponseEntity.ok(questionnaireService.listerTous());
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
+    public ResponseEntity<List<QuestionnaireResponse>> listerTous(
+            Authentication authentication) {
+
+        String role = authentication.getAuthorities()
+                .stream().findFirst().get().getAuthority();
+
+        if (role.equals("ROLE_ADMIN")) {
+            // ADMIN voit tous les questionnaires
+            return ResponseEntity.ok(questionnaireService.listerTous());
+        } else {
+            // EVALUATEUR voit seulement les siens
+            return ResponseEntity.ok(
+                    questionnaireService.listerParEvaluateur(
+                            authentication.getName()));
+        }
     }
 
     // GET /api/questionnaires/{id}
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
     public ResponseEntity<QuestionnaireResponse> afficher(
             @PathVariable Long id) {
         return ResponseEntity.ok(questionnaireService.findById(id));
@@ -50,6 +67,7 @@ public class QuestionnaireController {
 
     // PUT /api/questionnaires/{id}
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
     public ResponseEntity<QuestionnaireResponse> modifier(
             @PathVariable Long id,
             @Valid @RequestBody QuestionnaireRequest request) {
@@ -58,6 +76,7 @@ public class QuestionnaireController {
 
     // DELETE /api/questionnaires/{id}
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         questionnaireService.supprimer(id);
         return ResponseEntity.noContent().build();
@@ -65,14 +84,27 @@ public class QuestionnaireController {
 
     // GET /api/questionnaires/recherche?theme=Java
     @GetMapping("/recherche")
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
     public ResponseEntity<List<QuestionnaireResponse>> rechercherParTheme(
-            @RequestParam String theme) {
-        return ResponseEntity.ok(
-                questionnaireService.rechercherParTheme(theme));
+            @RequestParam String theme,
+            Authentication authentication) {
+
+        String role = authentication.getAuthorities()
+                .stream().findFirst().get().getAuthority();
+
+        if (role.equals("ROLE_ADMIN")) {
+            return ResponseEntity.ok(
+                    questionnaireService.rechercherParTheme(theme));
+        } else {
+            return ResponseEntity.ok(
+                    questionnaireService.rechercherParThemeEtEvaluateur(
+                            theme, authentication.getName()));
+        }
     }
 
     // GET /api/questionnaires/publies
     @GetMapping("/publies")
+    @PreAuthorize("hasAnyRole('USER', 'EVALUATEUR', 'ADMIN')")
     public ResponseEntity<List<QuestionnaireResponse>> listerPublies() {
         return ResponseEntity.ok(
                 questionnaireService.listerTous().stream()

@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 export interface AuthRequest {
   email: string;
   password: string;
+  nom?: string;
+  prenom?: string;
+  role?: string;
 }
 
 export interface AuthResponse {

@@ -6,6 +6,7 @@ import com.master.entity.Question;
 import com.master.entity.Questionnaire;
 import com.master.entity.User;
 import com.master.repository.QuestionnaireRepository;
+import com.master.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,16 +21,17 @@ import java.util.stream.Collectors;
 public class QuestionnaireService {
 
     private final QuestionnaireRepository questionnaireRepository;
+    private final UserRepository userRepository;
 
     // ============ CREATE ============
-    public QuestionnaireResponse creer(QuestionnaireRequest request, User admin) {
+    public QuestionnaireResponse creer(QuestionnaireRequest request, User evaluateur) {
         Questionnaire questionnaire = Questionnaire.builder()
                 .titre(request.getTitre())
                 .description(request.getDescription())
                 .theme(request.getTheme())
                 .dureeSecondes(request.getDureeSecondes())
                 .statut(parseStatut(request.getStatut()))
-                .createdBy(admin)
+                .createdBy(evaluateur)
                 .build();
 
         if (request.getQuestions() != null) {
@@ -90,11 +92,39 @@ public class QuestionnaireService {
         questionnaireRepository.deleteById(id);
     }
 
-    // ============ RECHERCHE ============
+    // ============ LISTER PAR EVALUATEUR ============
+    @Transactional(readOnly = true)
+    public List<QuestionnaireResponse> listerParEvaluateur(String email) {
+        User evaluateur = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Utilisateur non trouvé : " + email));
+        return questionnaireRepository.findByCreatedById(evaluateur.getId())
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    // ============ RECHERCHE PAR THEME ============
     @Transactional(readOnly = true)
     public List<QuestionnaireResponse> rechercherParTheme(String theme) {
         return questionnaireRepository
                 .findByThemeContainingIgnoreCase(theme).stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    // ============ RECHERCHE PAR THEME ET EVALUATEUR ============
+    @Transactional(readOnly = true)
+    public List<QuestionnaireResponse> rechercherParThemeEtEvaluateur(
+            String theme, String email) {
+        User evaluateur = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Utilisateur non trouvé : " + email));
+        return questionnaireRepository
+                .findByThemeContainingIgnoreCase(theme)
+                .stream()
+                .filter(q -> q.getCreatedBy() != null &&
+                        q.getCreatedBy().getId().equals(evaluateur.getId()))
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }

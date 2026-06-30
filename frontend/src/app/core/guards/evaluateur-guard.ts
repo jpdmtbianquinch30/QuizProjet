@@ -1,12 +1,15 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const authGuard: CanActivateFn = () => {
+export const evaluateurGuard: CanActivateFn = () => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
 
-  if (token && role === 'USER') {
+  console.log('Token:', token);
+  console.log('Role:', role);
+
+  if (token && (role === 'EVALUATEUR' || role === 'ADMIN')) {
     return true;
   }
 

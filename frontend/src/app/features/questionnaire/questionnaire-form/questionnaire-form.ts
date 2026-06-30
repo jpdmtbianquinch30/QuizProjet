@@ -95,7 +95,7 @@ export class QuestionnaireFormComponent implements OnInit {
       next: () => {
         this.succes = this.isModification ? 'Modifié !' : 'Créé !';
         this.chargement = false;
-        setTimeout(() => this.router.navigate(['/admin/questionnaires']), 1500);
+        setTimeout(() => this.router.navigate(['/evaluateur/questionnaires']), 1500);
       },
       error: () => {
         this.erreur = 'Erreur lors de la sauvegarde';

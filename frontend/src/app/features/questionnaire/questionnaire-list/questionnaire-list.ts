@@ -42,11 +42,11 @@ export class QuestionnaireListComponent implements OnInit {
   }
 
   nouveau(): void {
-    this.router.navigate(['/admin/questionnaires/nouveau']);
+    this.router.navigate(['/evaluateur/questionnaires/nouveau']);
   }
 
   modifier(id: number): void {
-    this.router.navigate(['/admin/questionnaires/modifier', id]);
+    this.router.navigate(['/evaluateur/questionnaires/modifier', id]);
   }
 
   supprimer(id: number): void {

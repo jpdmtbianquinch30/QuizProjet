@@ -75,3 +75,16 @@ button {
   margin-bottom: 1rem;
   font-size: 0.9rem;
 }
+.register-link {
+  text-align: center;
+  margin-top: 1.2rem;
+  color: #666;
+  font-size: 0.9rem;
+
+  span {
+    color: #4f46e5;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover { text-decoration: underline; }
+  }
+}

@@ -13,4 +13,8 @@ public class AuthRequest {
 
     @NotBlank(message = "Mot de passe obligatoire")
     private String password;
+
+    private String nom;
+    private String prenom;
+    private String role;
 }

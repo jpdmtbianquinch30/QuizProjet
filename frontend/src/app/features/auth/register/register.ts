@@ -15,6 +15,9 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
+  nom = '';
+  prenom = '';
+  role = 'USER';
   erreur = '';
   succes = '';
   chargement = false;
@@ -24,6 +27,11 @@ export class RegisterComponent {
   register(): void {
     this.erreur = '';
     this.succes = '';
+
+    if (!this.nom.trim()) {
+      this.erreur = 'Le nom est obligatoire';
+      return;
+    }
 
     if (this.password !== this.confirmPassword) {
       this.erreur = 'Les mots de passe ne correspondent pas';
@@ -37,18 +45,23 @@ export class RegisterComponent {
 
     this.chargement = true;
 
-    this.authService.register({ email: this.email, password: this.password })
-      .subscribe({
-        next: () => {
-          this.succes = 'Compte créé ! Redirection vers la connexion...';
-          this.chargement = false;
-          setTimeout(() => this.router.navigate(['/login']), 2000);
-        },
-        error: (err) => {
-          this.erreur = err.error || 'Erreur lors de la création du compte';
-          this.chargement = false;
-        }
-      });
+    this.authService.register({
+      email: this.email,
+      password: this.password,
+      nom: this.nom,
+      prenom: this.prenom,
+      role: this.role
+    }).subscribe({
+      next: () => {
+        this.succes = 'Compte créé ! Redirection vers la connexion...';
+        this.chargement = false;
+        setTimeout(() => this.router.navigate(['/login']), 2000);
+      },
+      error: (err) => {
+        this.erreur = err.error || 'Erreur lors de la création du compte';
+        this.chargement = false;
+      }
+    });
   }
 
   allerLogin(): void {

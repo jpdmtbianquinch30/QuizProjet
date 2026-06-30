@@ -40,11 +40,27 @@ public class AuthController {
                     .body("Email déjà utilisé");
         }
 
+        User.Role userRole = User.Role.USER;
+        if (request.getRole() != null) {
+            try {
+                userRole = User.Role.valueOf(request.getRole().toUpperCase());
+                // Sécurité : on n'autorise pas le register en ADMIN
+                if (userRole == User.Role.ADMIN) {
+                    userRole = User.Role.USER;
+                }
+            } catch (IllegalArgumentException e) {
+                userRole = User.Role.USER;
+            }
+        }
+
         User user = User.builder()
                 .email(request.getEmail())
                 .password(request.getPassword())
-                .nom(request.getEmail().split("@")[0])
-                .role(User.Role.USER)
+                .nom(request.getNom() != null && !request.getNom().isEmpty()
+                        ? request.getNom()
+                        : request.getEmail().split("@")[0])
+                .prenom(request.getPrenom())
+                .role(userRole)
                 .build();
 
         userService.save(user);

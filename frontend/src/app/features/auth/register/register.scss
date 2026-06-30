@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background: #f0f2f5;
+  padding: 2rem 0;
 }
 
 .register-card {
@@ -12,19 +13,16 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 480px;
 
-  h2 {
-    margin: 0 0 0.5rem;
-    color: #1a1a2e;
-    font-size: 1.8rem;
-  }
+  h2 { margin: 0 0 0.5rem; color: #1a1a2e; font-size: 1.8rem; }
+  .subtitle { color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
+}
 
-  .subtitle {
-    color: #666;
-    margin-bottom: 2rem;
-    font-size: 0.9rem;
-  }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
 }
 
 .form-group {
@@ -44,12 +42,47 @@
     border-radius: 8px;
     font-size: 1rem;
     box-sizing: border-box;
-
-    &:focus {
-      outline: none;
-      border-color: #4f46e5;
-    }
+    &:focus { outline: none; border-color: #4f46e5; }
   }
+}
+
+.role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+
+  &:hover { border-color: #4f46e5; background: #f5f3ff; }
+
+  &.selected {
+    border-color: #4f46e5;
+    background: #eef2ff;
+  }
+}
+
+.role-icone { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.role-titre {
+  font-weight: 600;
+  color: #1a1a2e;
+  font-size: 0.95rem;
+}
+
+.role-desc {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
 }
 
 button {
@@ -63,7 +96,6 @@ button {
   font-weight: 600;
   cursor: pointer;
   margin-top: 0.5rem;
-
   &:hover:not(:disabled) { background: #4338ca; }
   &:disabled { opacity: 0.6; cursor: not-allowed; }
 }
@@ -73,7 +105,6 @@ button {
   margin-top: 1.2rem;
   color: #666;
   font-size: 0.9rem;
-
   span {
     color: #4f46e5;
     cursor: pointer;

@@ -26,9 +26,13 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           if (res.role === 'ADMIN') {
-            this.router.navigate(['/admin/questionnaires']);
+           this.router.navigate(['/admin-dashboard']);
+          } else if (res.role === 'EVALUATEUR') {
+             this.router.navigate(['/evaluateur']);
+          } else if (res.role === 'USER') {
+             this.router.navigate(['/quiz']);
           } else {
-            this.erreur = 'Accès réservé aux administrateurs';
+            this.erreur = 'Rôle non reconnu';
             this.chargement = false;
           }
         },
@@ -37,5 +41,9 @@ export class LoginComponent {
           this.chargement = false;
         }
       });
+  }
+
+  allerRegister(): void {
+    this.router.navigate(['/register']);
   }
 }

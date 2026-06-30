@@ -1,0 +1,31 @@
+<div class="dashboard-container">
+
+  <div class="header">
+    <div class="header-info">
+      <h1>Bonjour, {{ nom }} 👋</h1>
+      <p>Espace Évaluateur — Plateforme Quiz</p>
+    </div>
+    <button class="btn-logout" (click)="logout()">
+      Déconnexion
+    </button>
+  </div>
+
+  <div class="section-titre">
+    <h2>Que voulez-vous faire ?</h2>
+  </div>
+
+  <div class="cartes-grid">
+    @for (menu of menus; track menu.titre) {
+      <div class="carte" (click)="naviguer(menu.route)"
+           [style.border-top]="'4px solid ' + menu.couleur">
+        <div class="carte-icone" [style.background]="menu.couleur + '20'">
+          <span>{{ menu.icone }}</span>
+        </div>
+        <h3 [style.color]="menu.couleur">{{ menu.titre }}</h3>
+        <p>{{ menu.description }}</p>
+        <div class="carte-fleche">→</div>
+      </div>
+    }
+  </div>
+
+</div>
