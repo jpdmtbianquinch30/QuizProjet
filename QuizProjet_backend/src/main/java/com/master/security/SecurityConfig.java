@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/questionnaires/publies").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
                         .requestMatchers("/api/questionnaires/**").hasAnyRole("EVALUATEUR", "ADMIN")
+                        .requestMatchers("/api/ia/**").hasAnyRole("EVALUATEUR", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

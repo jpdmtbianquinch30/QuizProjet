@@ -1,0 +1,80 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Groupes d'apprenants</h1>
+    <div class="header-actions">
+      <button class="btn-primary" (click)="ouvrirModaleCreation()">
+        + Nouveau groupe
+      </button>
+      <button class="btn-annuler" (click)="retour()">← Retour</button>
+    </div>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  @if (chargement) {
+    <p class="texte-info">Chargement...</p>
+  } @else if (groupes.length === 0) {
+    <div class="vide">
+      <p>Vous n'avez encore créé aucun groupe.</p>
+      <button class="btn-primary" (click)="ouvrirModaleCreation()">+ Créer mon premier groupe</button>
+    </div>
+  } @else {
+    <div class="groupes-grid">
+      @for (groupe of groupes; track groupe.id) {
+        <div class="groupe-carte" (click)="ouvrirGroupe(groupe.id)">
+          <div class="groupe-carte-header">
+            <h3>{{ groupe.nom }}</h3>
+            <button class="btn-supprimer" (click)="supprimerGroupe($event, groupe.id)">✕</button>
+          </div>
+          <p class="groupe-description">{{ groupe.description || 'Aucune description' }}</p>
+          <div class="groupe-stats">
+            <span class="stat">👥 {{ groupe.apprenants.length }} apprenant(s)</span>
+            @if (groupe.questionnaireAssigneTitre) {
+              <span class="stat stat-quiz">📝 {{ groupe.questionnaireAssigneTitre }}</span>
+            } @else {
+              <span class="stat stat-vide">Aucun quiz assigné</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- MODALE CREATION -->
+  @if (afficherModaleCreation) {
+    <div class="modale-overlay" (click)="fermerModaleCreation()">
+      <div class="modale" (click)="$event.stopPropagation()">
+        <div class="modale-header">
+          <h2>Nouveau groupe</h2>
+          <button class="btn-fermer" (click)="fermerModaleCreation()">✕</button>
+        </div>
+
+        @if (erreurCreation) {
+          <div class="erreur">{{ erreurCreation }}</div>
+        }
+
+        <div class="form-group">
+          <label>Nom du groupe *</label>
+          <input type="text" [(ngModel)]="nouveauNom" placeholder="Ex: Promo 2026 - Groupe A" />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="nouvelleDescription" rows="3"
+                    placeholder="Description du groupe..."></textarea>
+        </div>
+
+        <div class="modale-actions">
+          <button class="btn-annuler" (click)="fermerModaleCreation()">Annuler</button>
+          <button class="btn-primary" (click)="creerGroupe()" [disabled]="creationEnCours">
+            {{ creationEnCours ? 'Création...' : 'Créer' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

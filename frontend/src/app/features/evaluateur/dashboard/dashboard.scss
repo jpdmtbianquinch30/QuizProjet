@@ -35,8 +35,9 @@
 }
 
 .cartes-grid {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
 }
 
 .carte {
@@ -51,8 +52,9 @@
   justify-content: center;
   text-align: center;
   gap: 1rem;
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  min-height: 240px;
+  box-sizing: border-box;
   transition: transform 0.2s, box-shadow 0.2s;
 
   &:hover {

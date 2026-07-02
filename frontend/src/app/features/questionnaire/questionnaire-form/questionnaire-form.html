@@ -2,7 +2,12 @@
 
   <div class="header">
     <h1>{{ isModification ? 'Modifier le questionnaire' : 'Nouveau questionnaire' }}</h1>
-    <button class="btn-annuler" (click)="annuler()">← Retour</button>
+    <div class="header-actions">
+      <button class="btn-ia" (click)="ouvrirModaleIA()">
+        ✨ Générer avec IA
+      </button>
+      <button class="btn-annuler" (click)="annuler()">← Retour</button>
+    </div>
   </div>
 
   @if (erreur) {
@@ -54,9 +59,14 @@
   <div class="card">
     <div class="questions-header">
       <h2>Questions ({{ questionnaire.questions.length }})</h2>
-      <button class="btn-ajouter" (click)="ajouterQuestion()">
-        + Ajouter une question
-      </button>
+      <div class="questions-header-actions">
+        <button class="btn-ia" (click)="ouvrirModaleIA()">
+          ✨ Générer avec IA
+        </button>
+        <button class="btn-ajouter" (click)="ajouterQuestion()">
+          + Ajouter une question
+        </button>
+      </div>
     </div>
 
     <div *ngFor="let question of questionnaire.questions; let i = index"
@@ -120,5 +130,49 @@
       {{ chargement ? 'Sauvegarde...' : (isModification ? 'Modifier' : 'Créer') }}
     </button>
   </div>
+
+  <!-- MODALE GENERATION IA -->
+  @if (afficherModaleIA) {
+    <div class="modale-overlay" (click)="fermerModaleIA()">
+      <div class="modale-ia" (click)="$event.stopPropagation()">
+        <div class="modale-header">
+          <h2>✨ Générer des questions avec l'IA</h2>
+          <button class="btn-fermer" (click)="fermerModaleIA()">✕</button>
+        </div>
+
+        @if (erreurIA) {
+          <div class="erreur">{{ erreurIA }}</div>
+        }
+
+        <div class="form-group">
+          <label>Thème *</label>
+          <input type="text" [(ngModel)]="iaTheme"
+                 placeholder="Ex: Java, Réseaux, Histoire..." />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre de questions *</label>
+            <input type="number" [(ngModel)]="iaNombreQuestions" min="1" max="20" />
+          </div>
+          <div class="form-group">
+            <label>Niveau *</label>
+            <select [(ngModel)]="iaNiveau">
+              <option value="FACILE">Facile</option>
+              <option value="MOYEN">Moyen</option>
+              <option value="DIFFICILE">Difficile</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modale-actions">
+          <button class="btn-annuler" (click)="fermerModaleIA()">Annuler</button>
+          <button class="btn-ia" (click)="genererAvecIA()" [disabled]="chargementIA">
+            {{ chargementIA ? 'Génération en cours...' : '✨ Générer' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 
 </div>

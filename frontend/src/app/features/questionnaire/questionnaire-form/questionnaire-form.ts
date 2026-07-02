@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionnaireService, QuestionnaireRequest } from '../../../core/services/questionnaire';
+import { IaService } from '../../../core/services/ia';
 
 @Component({
   selector: 'app-questionnaire-form',
@@ -19,6 +20,14 @@ export class QuestionnaireFormComponent implements OnInit {
   erreur = '';
   succes = '';
 
+  // ===== Génération IA =====
+  afficherModaleIA = false;
+  chargementIA = false;
+  erreurIA = '';
+  iaTheme = '';
+  iaNombreQuestions = 5;
+  iaNiveau = 'MOYEN';
+
   questionnaire: QuestionnaireRequest = {
     titre: '',
     description: '',
@@ -30,6 +39,7 @@ export class QuestionnaireFormComponent implements OnInit {
 
   constructor(
     private questionnaireService: QuestionnaireService,
+    private iaService: IaService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -122,5 +132,70 @@ export class QuestionnaireFormComponent implements OnInit {
 
   annuler(): void {
     this.router.navigate(['/admin/questionnaires']);
+  }
+
+  // ===== Génération IA =====
+
+  ouvrirModaleIA(): void {
+    this.erreurIA = '';
+    if (!this.iaTheme) {
+      this.iaTheme = this.questionnaire.theme;
+    }
+    this.afficherModaleIA = true;
+  }
+
+  fermerModaleIA(): void {
+    this.afficherModaleIA = false;
+  }
+
+  genererAvecIA(): void {
+    this.erreurIA = '';
+
+    if (!this.iaTheme.trim()) {
+      this.erreurIA = 'Le thème est obligatoire';
+      return;
+    }
+    if (!this.iaNombreQuestions || this.iaNombreQuestions < 1) {
+      this.erreurIA = 'Le nombre de questions doit être au moins 1';
+      return;
+    }
+
+    this.chargementIA = true;
+
+    this.iaService.genererQuestions({
+      theme: this.iaTheme,
+      nombreQuestions: this.iaNombreQuestions,
+      niveau: this.iaNiveau
+    }).subscribe({
+      next: (res) => {
+        const questionsVides = this.questionnaire.questions.length === 1
+          && !this.questionnaire.questions[0].contenu.trim();
+
+        if (questionsVides) {
+          this.questionnaire.questions = [];
+        }
+
+        const decalage = this.questionnaire.questions.length;
+        const nouvelles = res.questions.map((q, i) => ({
+          ...q,
+          ordre: decalage + i + 1
+        }));
+
+        this.questionnaire.questions.push(...nouvelles);
+
+        if (!this.questionnaire.theme.trim()) {
+          this.questionnaire.theme = this.iaTheme;
+        }
+
+        this.chargementIA = false;
+        this.afficherModaleIA = false;
+        this.succes = `${res.questions.length} question(s) générée(s) par l'IA !`;
+        setTimeout(() => this.succes = '', 3000);
+      },
+      error: (err) => {
+        this.erreurIA = err.error || 'Erreur lors de la génération IA';
+        this.chargementIA = false;
+      }
+    });
   }
 }

@@ -50,10 +50,41 @@ export const routes: Routes = [
         .then(m => m.QuestionnaireFormComponent)
     },
     {
+       path: 'profil',
+     loadComponent: () => import('./features/evaluateur/profil/profil')
+        .then(m => m.ProfilComponent)
+},
+    {
       path: 'questionnaires/modifier/:id',
       loadComponent: () => import('./features/questionnaire/questionnaire-form/questionnaire-form')
         .then(m => m.QuestionnaireFormComponent)
-    }
+    },
+    {
+  path: 'profil',
+  loadComponent: () => import('./features/evaluateur/profil/profil')
+    .then(m => m.ProfilComponent)
+},
+{
+  path: 'classement',
+  loadComponent: () => import('./features/evaluateur/classement/classement')
+    .then(m => m.ClassementComponent)
+},
+{
+  path: 'classement',
+  loadComponent: () => import('./features/evaluateur/classement/classement')
+    .then(m => m.ClassementComponent)
+},
+{
+  path: 'groupes',
+  loadComponent: () => import('./features/evaluateur/groupe-list/groupe-list')
+    .then(m => m.GroupeListComponent)
+},
+{
+  path: 'groupes/:id',
+  loadComponent: () => import('./features/evaluateur/groupe-detail/groupe-detail')
+    .then(m => m.GroupeDetailComponent)
+}
+    
   ]
 },
   { path: '**', redirectTo: 'login' }

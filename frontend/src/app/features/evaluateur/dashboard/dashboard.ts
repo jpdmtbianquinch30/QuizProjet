@@ -21,7 +21,28 @@ export class DashboardComponent {
       icone: '📝',
       couleur: '#4f46e5',
       route: '/evaluateur/questionnaires'
-    }
+    },
+    {
+  titre: 'Mon Profil',
+  description: 'Voir et modifier vos informations personnelles',
+  icone: '👤',
+  couleur: '#8b5cf6',
+  route: '/evaluateur/profil'
+    },
+    {
+  titre: 'Classement',
+  description: 'Consulter les scores obtenus par vos apprenants',
+  icone: '🏆',
+  couleur: '#f59e0b',
+  route: '/evaluateur/classement'
+},
+  {
+  titre: 'Groupes d\'apprenants',
+  description: 'Créer des groupes et leur assigner des questionnaires',
+  icone: '👥',
+  couleur: '#10b981',
+  route: '/evaluateur/groupes'
+}
   ];
 
   constructor(private router: Router, private authService: AuthService) {

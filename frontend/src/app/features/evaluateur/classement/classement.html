@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Classement</h1>
+    <button class="btn-annuler" (click)="retour()">← Retour</button>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  <div class="card filtre-card">
+    <div class="form-group">
+      <label>Filtrer par questionnaire</label>
+
+      @if (chargementQuestionnaires) {
+        <p class="texte-info">Chargement des questionnaires...</p>
+      } @else if (questionnaires.length === 0) {
+        <p class="texte-info">Vous n'avez encore créé aucun questionnaire.</p>
+      } @else {
+        <select [(ngModel)]="questionnaireSelectionneId" (ngModelChange)="onChangementQuestionnaire()">
+          @for (q of questionnaires; track q.id) {
+            <option [value]="q.id">{{ q.titre }}</option>
+          }
+        </select>
+      }
+    </div>
+  </div>
+
+  @if (questionnaireSelectionneId) {
+    <div class="card">
+      <h2>Résultats</h2>
+
+      @if (chargementScores) {
+        <p class="texte-info">Chargement du classement...</p>
+      } @else if (scores.length === 0) {
+        <p class="texte-info">Aucun score enregistré pour ce questionnaire pour le moment.</p>
+      } @else {
+        <table class="tableau-classement">
+          <thead>
+            <tr>
+              <th>Rang</th>
+              <th>Apprenant</th>
+              <th>Score</th>
+              <th>%</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (score of scores; track score.id; let i = $index) {
+              <tr [class.podium]="i < 3">
+                <td class="rang">{{ medaille(i) }}</td>
+                <td>{{ score.utilisateurPrenom }} {{ score.utilisateurNom }}</td>
+                <td>{{ score.scoreObtenu }} / {{ score.scoreMax }}</td>
+                <td>
+                  <span class="badge-pourcentage"
+                        [class.bon]="score.pourcentage >= 70"
+                        [class.moyen]="score.pourcentage >= 40 && score.pourcentage < 70"
+                        [class.faible]="score.pourcentage < 40">
+                    {{ score.pourcentage }}%
+                  </span>
+                </td>
+                <td class="date">{{ score.dateSoumission | date:'dd/MM/yyyy HH:mm' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  }
+
+</div>
