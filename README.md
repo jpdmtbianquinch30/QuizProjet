@@ -1,6 +1,4 @@
-Voici le README complet mis à jour (301 lignes) — je te le livre directement, à copier-coller dans `README.md` à la racine du projet :
 
-```markdown
 # QuizProjet — Plateforme de Quiz Interactive
 
 Projet réalisé dans le cadre du Master Génie Logiciel
