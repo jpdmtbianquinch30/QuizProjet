@@ -46,11 +46,6 @@ Méthode : **SCRUM** | Sprint 2 (en cours)
 - ✅ Consultation du classement des scores par questionnaire
 - ✅ Création de groupes d'apprenants + assignation de questionnaire
 
-### Sprint 2 — Restant à faire
-- [ ] Interface USER pour jouer aux quiz (soumission des réponses)
-- [ ] Compte à rebours en temps réel côté USER
-- [ ] Dashboard Admin complet
-- [ ] Interface Client (USER) complète
 
 ---
 
