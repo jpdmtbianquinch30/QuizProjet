@@ -1,14 +1,31 @@
-<div class="client-container">
+<div class="dashboard-container">
+
   <div class="header">
-    <h1>🎯 Plateforme Quiz</h1>
-    <p>Testez vos connaissances !</p>
+    <div class="header-info">
+      <h1>Bonjour, {{ nom }} 👋</h1>
+      <p>Espace Apprenant — Plateforme Quiz</p>
+    </div>
+    <button class="btn-logout" (click)="logout()">
+      Déconnexion
+    </button>
   </div>
 
-  <div class="content">
-    <div class="message">
-      <h2>Bienvenue !</h2>
-      <p>La partie quiz est en cours de développement.</p>
-      <p>Revenez bientôt pour jouer ! 🚀</p>
-    </div>
+  <div class="section-titre">
+    <h2>Que voulez-vous faire ?</h2>
   </div>
+
+  <div class="cartes-grid">
+    @for (menu of menus; track menu.titre) {
+      <div class="carte" (click)="naviguer(menu.route)"
+           [style.border-top]="'4px solid ' + menu.couleur">
+        <div class="carte-icone" [style.background]="menu.couleur + '20'">
+          <span>{{ menu.icone }}</span>
+        </div>
+        <h3 [style.color]="menu.couleur">{{ menu.titre }}</h3>
+        <p>{{ menu.description }}</p>
+        <div class="carte-fleche">→</div>
+      </div>
+    }
+  </div>
+
 </div>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { QuestionDTO } from './questionnaire';
+import { QuestionDTO } from '../models/quiz';
+
 
 export interface IaGenerationRequest {
   theme: string;

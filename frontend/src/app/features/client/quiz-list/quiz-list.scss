@@ -1,0 +1,131 @@
+.quiz-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.btn-retour {
+  background: none;
+  border: none;
+  color: #6366f1;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 0;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.7; }
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e1b2e;
+  margin: 0 0 0.3rem;
+}
+
+.page-subtitle {
+  color: #8b8a99;
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.info, .erreur {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #8b8a99;
+  font-size: 0.95rem;
+}
+
+.erreur { color: #b91c1c; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #ececf3;
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: border-color 0.15s, transform 0.15s;
+
+  &:hover {
+    border-color: #d8d8ee;
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    margin: 0 0 0.35rem;
+    color: #1e1b2e;
+    font-size: 1.05rem;
+    font-weight: 650;
+  }
+
+  .theme {
+    display: inline-block;
+    color: #6366f1;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: #eef0fe;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    color: #6b6a78;
+    margin: 0.5rem 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #a3a2ae;
+    margin: 1rem 0 1.2rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #f0f0f5;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.65rem;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: background 0.15s;
+
+    &:hover:not(:disabled) { background: #4f46e5; }
+
+    &:disabled {
+      background: #eeedf5 !important;
+      color: #a3a2ae;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.deja-fait {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ecfdf5;
+  color: #047857;
+  padding: 0.55rem 0.7rem;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+}

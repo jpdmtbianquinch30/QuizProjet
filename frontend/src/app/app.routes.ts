@@ -20,13 +20,38 @@ export const routes: Routes = [
     .then(m => m.AdminDashboardComponent)
 },
 {
-  path: 'quiz',
+  path: 'client',
   canActivate: [authGuard],
   children: [
     {
       path: '',
       loadComponent: () => import('./features/client/client-dashboard/client-dashboard')
         .then(m => m.ClientDashboard)
+    },
+    {
+      path: 'liste',
+      loadComponent: () => import('./features/client/quiz-list/quiz-list')
+        .then(m => m.QuizList)
+    },
+    {
+      path: 'jouer/:id',
+      loadComponent: () => import('./features/client/quiz-play/quiz-play')
+        .then(m => m.QuizPlay)
+    },
+    {
+      path: 'resultat',
+      loadComponent: () => import('./features/client/quiz-result/quiz-result')
+        .then(m => m.QuizResult)
+    },
+    {
+      path: 'historique',
+      loadComponent: () => import('./features/client/quiz-historique/quiz-historique')
+        .then(m => m.QuizHistorique)
+    },
+    {
+      path: 'profil',
+      loadComponent: () => import('./features/client/profil/profil')
+        .then(m => m.ProfilComponent)
     }
   ]
 },

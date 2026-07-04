@@ -30,7 +30,7 @@ export class LoginComponent {
           } else if (res.role === 'EVALUATEUR') {
              this.router.navigate(['/evaluateur']);
           } else if (res.role === 'USER') {
-             this.router.navigate(['/quiz']);
+             this.router.navigate(['/client']);
           } else {
             this.erreur = 'Rôle non reconnu';
             this.chargement = false;

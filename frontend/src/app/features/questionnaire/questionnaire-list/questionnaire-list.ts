@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { QuestionnaireService, QuestionnaireResponse } from '../../../core/services/questionnaire';
+import { QuestionnaireService } from '../../../core/services/questionnaire';
+import { QuestionnaireResponse } from '../../../core/models/quiz';
 import { AuthService } from '../../../core/services/auth';
 
 @Component({
