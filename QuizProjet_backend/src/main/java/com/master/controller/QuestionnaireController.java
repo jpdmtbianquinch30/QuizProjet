@@ -24,6 +24,7 @@ public class QuestionnaireController {
     private final QuestionnaireService questionnaireService;
     private final UserService userService;
 
+
     // POST /api/questionnaires
     @PostMapping
     @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
@@ -74,6 +75,34 @@ public class QuestionnaireController {
         return ResponseEntity.ok(questionnaireService.modifier(id, request));
     }
 
+    // GET /api/questionnaires/assignes — questionnaires assignés à l'apprenant connecté
+    @GetMapping("/assignes")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<QuestionnaireResponse>> listerAssignes(
+            Authentication authentication) {
+
+        User apprenant = userService.findByEmail(authentication.getName());
+        return ResponseEntity.ok(questionnaireService.listerAssignes(apprenant.getId()));
+    }
+
+    // GET /api/questionnaires/{id}/jouer — questionnaire sans les bonnes réponses
+    @GetMapping("/{id}/jouer")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> afficherPourJeu(
+            @PathVariable Long id,
+            Authentication authentication) {
+
+        User apprenant = userService.findByEmail(authentication.getName());
+        try {
+            return ResponseEntity.ok(
+                    questionnaireService.findByIdPourApprenant(id, apprenant.getId()));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+    }
+
     // DELETE /api/questionnaires/{id}
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
@@ -81,6 +110,7 @@ public class QuestionnaireController {
         questionnaireService.supprimer(id);
         return ResponseEntity.noContent().build();
     }
+
 
     // GET /api/questionnaires/recherche?theme=Java
     @GetMapping("/recherche")
@@ -112,4 +142,6 @@ public class QuestionnaireController {
                         .toList()
         );
     }
+
+
 }

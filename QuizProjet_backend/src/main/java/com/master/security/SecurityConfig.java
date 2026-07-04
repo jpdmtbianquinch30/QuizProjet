@@ -39,9 +39,11 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/questionnaires/publies").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
+                        .requestMatchers("/api/questionnaires/publies", "/api/questionnaires/assignes", "/api/questionnaires/*/jouer")
+                        .hasAnyRole("USER", "EVALUATEUR", "ADMIN")
                         .requestMatchers("/api/questionnaires/**").hasAnyRole("EVALUATEUR", "ADMIN")
-                        .requestMatchers("/api/ia/**").hasAnyRole("EVALUATEUR", "ADMIN")
+                        .requestMatchers("/api/scores/**").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
+                        .requestMatchers("/api/questions/*/verifier").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

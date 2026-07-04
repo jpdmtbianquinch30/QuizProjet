@@ -2,10 +2,13 @@ package com.master.service;
 
 import com.master.dto.QuestionnaireRequest;
 import com.master.dto.QuestionnaireResponse;
+import com.master.entity.Groupe;
 import com.master.entity.Question;
 import com.master.entity.Questionnaire;
 import com.master.entity.User;
+import com.master.repository.GroupeRepository;
 import com.master.repository.QuestionnaireRepository;
+import com.master.repository.ScoreRepository;
 import com.master.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +26,8 @@ public class QuestionnaireService {
 
     private final QuestionnaireRepository questionnaireRepository;
     private final UserRepository userRepository;
+    private final GroupeRepository groupeRepository;
+    private final ScoreRepository scoreRepository;
 
     // ============ CREATE ============
     public QuestionnaireResponse creer(QuestionnaireRequest request, User evaluateur) {
@@ -178,5 +184,48 @@ public class QuestionnaireService {
         } catch (IllegalArgumentException e) {
             return Questionnaire.Statut.BROUILLON;
         }
+    }
+
+    // ============ LISTER LES QUESTIONNAIRES ASSIGNÉS À UN APPRENANT ============
+    @Transactional(readOnly = true)
+    public List<QuestionnaireResponse> listerAssignes(Long apprenantId) {
+        return groupeRepository.findByApprenantId(apprenantId).stream()
+                .map(Groupe::getQuestionnaireAssigne)
+                .filter(Objects::nonNull)
+                .filter(q -> q.getStatut() == Questionnaire.Statut.PUBLIE)
+                .distinct()
+                .map(this::toResponsePourApprenant)
+                .collect(Collectors.toList());
+    }
+
+    // ============ RÉCUPÉRER UN QUESTIONNAIRE POUR JOUER (sans les bonnes réponses) ============
+    @Transactional(readOnly = true)
+    public QuestionnaireResponse findByIdPourApprenant(Long id, Long apprenantId) {
+        Questionnaire q = questionnaireRepository.findById(id)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Questionnaire non trouvé : " + id));
+
+        boolean autorise = groupeRepository.findByApprenantId(apprenantId).stream()
+                .anyMatch(g -> g.getQuestionnaireAssigne() != null
+                        && g.getQuestionnaireAssigne().getId().equals(id));
+
+        if (!autorise) {
+            throw new IllegalArgumentException("Vous n'avez pas accès à ce questionnaire");
+        }
+
+        if (scoreRepository.existsByUserIdAndQuestionnaireId(apprenantId, id)) {
+            throw new IllegalStateException("Vous avez déjà répondu à ce questionnaire");
+        }
+
+        return toResponsePourApprenant(q);
+    }
+
+    // ============ MASQUER LES BONNES RÉPONSES ============
+    private QuestionnaireResponse toResponsePourApprenant(Questionnaire q) {
+        QuestionnaireResponse response = toResponse(q);
+        if (response.getQuestions() != null) {
+            response.getQuestions().forEach(qd -> qd.setBonneReponseIndex(null));
+        }
+        return response;
     }
 }
