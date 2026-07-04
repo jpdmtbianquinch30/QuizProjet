@@ -39,7 +39,7 @@ Méthode : SCRUM | Sprint 2 (en cours)
 - ✅ Consultation du classement des scores par questionnaire
 - ✅ Création de groupes d'apprenants + assignation de questionnaire
 
-### Sprint 2 (SCRUM-21 — Apprenant)
+### Sprint 2 (SCRUM-19 — Apprenant)
 - ✅ Consultation des questionnaires assignés (via appartenance à un groupe)
 - ✅ Démarrage d'un quiz avec compte à rebours en temps réel (soumission automatique à expiration)
 - ✅ Vérification de chaque réponse au moment du choix, avec feedback visuel (bordure verte si correct, rouge si incorrect, bonne réponse surlignée en cas d'erreur)
