@@ -28,6 +28,9 @@ public class ScoreService {
      * Corrige les réponses envoyées par l'utilisateur et enregistre le score.
      */
     public ScoreResponse soumettre(SoumissionRequest request, User user) {
+        if (scoreRepository.existsByUserIdAndQuestionnaireId(user.getId(), request.getQuestionnaireId())) {
+            throw new IllegalStateException("Vous avez déjà répondu à ce questionnaire");
+        }
 
         Questionnaire questionnaire = questionnaireRepository.findById(request.getQuestionnaireId())
                 .orElseThrow(() -> new IllegalArgumentException("Questionnaire introuvable"));

@@ -27,13 +27,17 @@ public class ScoreController {
     // POST /api/scores — soumettre les réponses d'un quiz
     @PostMapping
     @PreAuthorize("hasAnyRole('USER', 'EVALUATEUR', 'ADMIN')")
-    public ResponseEntity<ScoreResponse> soumettre(
+    public ResponseEntity<?> soumettre(
             @Valid @RequestBody SoumissionRequest request,
             Authentication authentication) {
 
         User user = userService.findByEmail(authentication.getName());
-        ScoreResponse response = scoreService.soumettre(request, user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        try {
+            ScoreResponse response = scoreService.soumettre(request, user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     // GET /api/scores/classement/{questionnaireId} — classement d'un questionnaire

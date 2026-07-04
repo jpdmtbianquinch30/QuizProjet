@@ -1,0 +1,41 @@
+<div class="quiz-play-container" *ngIf="!chargement && questionnaire">
+  <div class="timer" [class.alerte]="tempsRestant <= 10">
+    ⏱ {{ minutesSecondes }}
+  </div>
+
+  <h2>{{ questionnaire.titre }}</h2>
+  <p class="progression">
+    Question {{ indexActuel + 1 }} / {{ questionnaire.questions.length }}
+  </p>
+
+  <div class="question" *ngIf="questionCourante">
+    <h3>{{ questionCourante.contenu }}</h3>
+
+    <div class="choix">
+        <button
+            *ngFor="let opt of questionCourante.choix; let i = index"
+            [class.selectionne]="reponses[indexActuel] === i && !dejaRepondu()"
+            [class.correct]="classeChoix(i) === 'correct'"
+            [class.incorrect]="classeChoix(i) === 'incorrect'"
+            [class.bonne-reponse]="classeChoix(i) === 'bonne-reponse'"
+            [disabled]="dejaRepondu()"
+            (click)="choisir(i)">
+            {{ opt }}
+        </button>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button (click)="precedent()" [disabled]="indexActuel === 0">← Précédent</button>
+
+    <button *ngIf="!estDerniereQuestion" (click)="suivant()">Suivant →</button>
+
+    <button *ngIf="estDerniereQuestion" class="btn-soumettre"
+            (click)="soumettre()" [disabled]="soumissionEnCours">
+      {{ soumissionEnCours ? 'Envoi...' : 'Terminer le quiz' }}
+    </button>
+  </div>
+</div>
+
+<div class="info" *ngIf="chargement">Chargement du quiz...</div>
+<div class="erreur" *ngIf="erreur">{{ erreur }}</div>

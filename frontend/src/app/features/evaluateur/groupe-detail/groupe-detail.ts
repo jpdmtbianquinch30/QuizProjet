@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupeService, GroupeResponse } from '../../../core/services/groupe';
-import { QuestionnaireService, QuestionnaireResponse } from '../../../core/services/questionnaire';
+import { QuestionnaireResponse } from '../../../core/models/quiz';
+import { QuestionnaireService } from '../../../core/services/questionnaire';
+
 
 @Component({
   selector: 'app-groupe-detail',

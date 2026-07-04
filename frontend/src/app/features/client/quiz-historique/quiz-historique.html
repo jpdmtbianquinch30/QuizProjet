@@ -1,0 +1,27 @@
+<div class="historique-container">
+  <button class="btn-retour" (click)="retour()">← Retour</button>
+  <h1>Mes résultats</h1>
+
+  <div *ngIf="chargement" class="info">Chargement...</div>
+  <div *ngIf="erreur" class="erreur">{{ erreur }}</div>
+
+  <div *ngIf="!chargement && scores.length === 0" class="info">
+    Vous n'avez encore complété aucun quiz.
+  </div>
+
+  <div class="liste">
+    <div class="ligne" *ngFor="let s of scores">
+      <div class="score">
+        <div class="barre">
+            <div class="remplissage"
+                [style.width.%]="s.pourcentage"
+                [style.background]="couleurScore(s.pourcentage)"></div>
+        </div>
+        <div class="chiffres">
+            <span class="valeur">{{ s.scoreObtenu }}/{{ s.scoreMax }}</span>
+            <span class="pct" [style.color]="couleurScore(s.pourcentage)">{{ s.pourcentage }}%</span>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>

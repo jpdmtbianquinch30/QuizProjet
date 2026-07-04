@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { QuestionnaireService, QuestionnaireRequest } from '../../../core/services/questionnaire';
+import { QuestionnaireService } from '../../../core/services/questionnaire';
+import { QuestionnaireRequest } from '../../../core/models/quiz';
 import { IaService } from '../../../core/services/ia';
 
 @Component({

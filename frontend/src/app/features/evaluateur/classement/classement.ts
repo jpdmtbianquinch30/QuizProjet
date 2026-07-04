@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScoreService, ScoreResponse } from '../../../core/services/score';
-import { QuestionnaireService, QuestionnaireResponse } from '../../../core/services/questionnaire';
+import { QuestionnaireResponse } from '../../../core/models/quiz';
+import { QuestionnaireService } from '../../../core/services/questionnaire';
+
 
 @Component({
   selector: 'app-classement',

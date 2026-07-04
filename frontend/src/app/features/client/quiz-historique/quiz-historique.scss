@@ -1,0 +1,91 @@
+.historique-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.btn-retour {
+  background: none;
+  border: none;
+  color: #6366f1;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 0;
+
+  &:hover { opacity: 0.7; }
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e1b2e;
+  margin: 0 0 2rem;
+}
+
+.info, .erreur {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #8b8a99;
+}
+.erreur { color: #b91c1c; }
+
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ececf3;
+  padding: 1.1rem 1.4rem;
+  border-radius: 12px;
+
+  .infos {
+    h3 {
+      margin: 0;
+      color: #1e1b2e;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    p {
+      margin: 0.25rem 0 0;
+      color: #a3a2ae;
+      font-size: 0.78rem;
+    }
+  }
+
+  .score {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    .barre {
+      width: 70px;
+      height: 6px;
+      border-radius: 3px;
+      background: #eeedf5;
+      overflow: hidden;
+
+      .remplissage {
+        height: 100%;
+        border-radius: 3px;
+      }
+    }
+
+    .chiffres {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      min-width: 60px;
+
+      .valeur { font-weight: 700; font-size: 0.95rem; color: #1e1b2e; }
+      .pct { font-size: 0.75rem; font-weight: 600; }
+    }
+  }
+}

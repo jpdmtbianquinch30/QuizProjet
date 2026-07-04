@@ -1,0 +1,14 @@
+<div class="resultat-container" *ngIf="score">
+  <div class="carte">
+    <div class="badge">✓</div>
+    <h1>Quiz terminé</h1>
+    <p class="titre-quiz">{{ score.questionnaireTitre }}</p>
+
+    <div class="score-final">
+      <span class="valeur">{{ score.scoreObtenu }} / {{ score.scoreMax }}</span>
+      <span class="pourcentage">{{ score.pourcentage }}% de réussite</span>
+    </div>
+
+    <button (click)="retour()">Retour aux questionnaires</button>
+  </div>
+</div>
