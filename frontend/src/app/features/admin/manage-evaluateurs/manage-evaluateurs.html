@@ -1,0 +1,41 @@
+<div class="manage-container">
+  <div class="page-header">
+    <h2>Gestion des Évaluateurs</h2>
+    <p class="subtitle">Suivez les professeurs, leurs spécialités et gérez leurs accès à la plateforme.</p>
+  </div>
+
+  <div class="table-responsive">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nom complet</th>
+          <th>Email</th>
+          <th>Spécialité</th>
+          <th>Quiz Créés</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eval of listeEvaluateurs">
+          <td class="font-bold">{{ eval.nom }}</td>
+          <td>{{ eval.email }}</td>
+          <td>
+            <span class="spec-badge">{{ eval.specialite }}</span>
+          </td>
+          <td>{{ eval.quizCrees }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="eval.statut.toLowerCase()">
+              {{ eval.statut }}
+            </span>
+          </td>
+          <td>
+            <button (click)="changerStatut(eval)" class="btn-action" [ngClass]="{'btn-block': eval.statut === 'Actif', 'btn-unblock': eval.statut === 'Bloqué'}">
+              {{ eval.statut === 'Actif' ? 'Bloquer' : 'Activer' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

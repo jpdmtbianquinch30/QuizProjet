@@ -1,0 +1,43 @@
+<div class="manage-container">
+  <div class="page-header">
+    <h2>Gestion des Étudiants</h2>
+    <p class="subtitle">Consultez les scores, l'avancement et gérez les accès des étudiants inscrits.</p>
+  </div>
+
+  <div class="table-responsive">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nom complet</th>
+          <th>Email</th>
+          <th>Quiz complétés</th>
+          <th>Score Moyen</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etudiant of listeEtudiants">
+          <td class="font-bold">{{ etudiant.nom }}</td>
+          <td>{{ etudiant.email }}</td>
+          <td>{{ etudiant.quizCompletes }} / {{ etudiant.totalQuiz }}</td>
+          <td>
+            <span class="score-badge" [ngClass]="{'good': etudiant.scoreMoyen >= 80, 'average': etudiant.scoreMoyen < 80}">
+              {{ etudiant.scoreMoyen }}%
+            </span>
+          </td>
+          <td>
+            <span class="status-badge" [ngClass]="etudiant.statut.toLowerCase()">
+              {{ etudiant.statut }}
+            </span>
+          </td>
+          <td>
+            <button (click)="changerStatut(etudiant)" class="btn-action" [ngClass]="{'btn-block': etudiant.statut === 'Actif', 'btn-unblock': etudiant.statut === 'Bloqué'}">
+              {{ etudiant.statut === 'Actif' ? 'Bloquer' : 'Activer' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

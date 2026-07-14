@@ -1,0 +1,37 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>QuizApp Admin</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <a routerLink="/admin/stats" routerLinkActive="active" class="menu-item">
+        <span class="icon">📊</span> Tableau de Bord
+      </a>
+      <a routerLink="/admin/etudiants" routerLinkActive="active" class="menu-item">
+        <span class="icon">🎓</span> Gestion Étudiants
+      </a>
+      <a routerLink="/admin/evaluateurs" routerLinkActive="active" class="menu-item">
+        <span class="icon">🧑‍🏫</span> Gestion Évaluateurs
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a routerLink="/login" class="menu-item logout">
+        <span class="icon">🚪</span> Déconnexion
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-navbar">
+      <div class="user-profile">
+        <span>Bienvenue, <strong>Admin</strong></span>
+      </div>
+    </header>
+    
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

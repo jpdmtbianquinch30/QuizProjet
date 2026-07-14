@@ -1,0 +1,89 @@
+.stats-container {
+  padding: 24px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.stats-header {
+  margin-bottom: 28px;
+  h2 { margin: 0; color: #2c3e50; font-size: 24px; }
+  .subtitle { margin: 4px 0 0 0; color: #7f8c8d; font-size: 14px; }
+}
+
+// Grille de cartes statistiques
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  border-left: 5px solid #ccc;
+
+  .stat-icon {
+    font-size: 32px;
+    margin-right: 16px;
+  }
+
+  .stat-info {
+    h3 { margin: 0; font-size: 26px; color: #2c3e50; font-weight: 700; }
+    p { margin: 4px 0 0 0; font-size: 13px; color: #7f8c8d; }
+  }
+
+  // Variations de couleurs
+  &.blue { border-left-color: #3498db; .stat-icon { color: #3498db; } }
+  &.orange { border-left-color: #e67e22; .stat-icon { color: #e67e22; } }
+  &.green { border-left-color: #2ecc71; .stat-icon { color: #2ecc71; } }
+  &.purple { border-left-color: #9b59b6; .stat-icon { color: #9b59b6; } }
+}
+
+// Flux d'activité récente
+.activity-section {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+
+  h3 { margin: 0 0 20px 0; color: #2c3e50; font-size: 18px; }
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f2f6;
+  &:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+.activity-badge {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+
+  &.quiz { background-color: #3498db; }
+  &.inscription { background-color: #2ecc71; }
+  &.alerte { background-color: #e67e22; }
+}
+
+.activity-content {
+  h4 { margin: 0; font-size: 14px; color: #2c3e50; font-weight: 600; }
+  p { margin: 4px 0; font-size: 13px; color: #57606f; }
+  .activity-time { font-size: 11px; color: #a4b0be; }
+}

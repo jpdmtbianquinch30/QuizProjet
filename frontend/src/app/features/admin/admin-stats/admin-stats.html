@@ -1,0 +1,54 @@
+<div class="stats-container">
+  <div class="stats-header">
+    <h2>Tableau de Bord Administrateur</h2>
+    <p class="subtitle">Vue d'ensemble de l'activité, des utilisateurs et des performances globales.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <div class="stat-icon">🎓</div>
+      <div class="stat-info">
+        <h3>{{ totalEtudiants }}</h3>
+        <p>Étudiants Inscrits</p>
+      </div>
+    </div>
+
+    <div class="stat-card orange">
+      <div class="stat-icon">🧑‍🏫</div>
+      <div class="stat-info">
+        <h3>{{ totalEvaluateurs }}</h3>
+        <p>Évaluateurs Actifs</p>
+      </div>
+    </div>
+
+    <div class="stat-card green">
+      <div class="stat-icon">📝</div>
+      <div class="stat-info">
+        <h3>{{ totalQuiz }}</h3>
+        <p>Quiz Disponibles</p>
+      </div>
+    </div>
+
+    <div class="stat-card purple">
+      <div class="stat-icon">📈</div>
+      <div class="stat-info">
+        <h3>{{ tauxReussiteGlobal }}%</h3>
+        <p>Taux de Réussite Moyen</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-section">
+    <h3>Activité Récente de la Plateforme</h3>
+    <div class="activity-list">
+      <div class="activity-item" *ngFor="let act of fluxActivites">
+        <div class="activity-badge" [ngClass]="act.type"></div>
+        <div class="activity-content">
+          <h4>{{ act.titre }}</h4>
+          <p>{{ act.description }}</p>
+          <span class="activity-time">{{ act.temps }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

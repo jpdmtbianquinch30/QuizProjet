@@ -1,0 +1,58 @@
+.manage-container {
+  padding: 24px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+  h2 { margin: 0; color: #2c3e50; font-size: 22px; }
+  .subtitle { margin: 4px 0 0 0; color: #7f8c8d; font-size: 14px; }
+}
+
+.table-responsive {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  th, td { padding: 16px 20px; font-size: 14px; }
+  th { background-color: #f1f2f6; color: #2c3e50; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+  tr { border-bottom: 1px solid #f1f2f6; &:hover { background-color: #fafafa; } }
+}
+
+.font-bold { font-weight: 600; color: #2c3e50; }
+
+.score-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  &.good { background-color: #e3fcef; color: #00875a; }
+  &.average { background-color: #fff0b3; color: #b78103; }
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  &.actif { background-color: #e3fcef; color: #00875a; }
+  &.bloqué { background-color: #ffebe6; color: #de350b; }
+}
+
+.btn-action {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &.btn-block { background-color: #fff1f0; color: #ff4d4f; border: 1px solid #ffa39e; &:hover { background-color: #ff4d4f; color: #fff; } }
+  &.btn-unblock { background-color: #e6f7ff; color: #1890ff; border: 1px solid #91d5ff; &:hover { background-color: #1890ff; color: #fff; } }
+}
