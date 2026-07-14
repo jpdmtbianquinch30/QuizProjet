@@ -1,0 +1,76 @@
+<div class="dashboard">
+
+  <header class="topbar">
+
+    <div>
+      <h1>🛡️ Administration</h1>
+      <p>Bienvenue sur la plateforme de gestion des Quiz</p>
+    </div>
+
+    <button class="logout" (click)="logout()">
+      Déconnexion
+    </button>
+
+  </header>
+
+
+  <section class="stats">
+
+    <div class="stat-card users">
+      <span>👥</span>
+      <h2>{{stats.utilisateurs}}</h2>
+      <p>Utilisateurs</p>
+    </div>
+
+    <div class="stat-card eval">
+      <span>🎓</span>
+      <h2>{{stats.evaluateurs}}</h2>
+      <p>Évaluateurs</p>
+    </div>
+
+    <div class="stat-card quiz">
+      <span>📝</span>
+      <h2>{{stats.questionnaires}}</h2>
+      <p>Questionnaires</p>
+    </div>
+
+    <div class="stat-card archive">
+      <span>📦</span>
+      <h2>{{stats.archives}}</h2>
+      <p>Archives</p>
+    </div>
+
+  </section>
+
+
+
+  <h2 class="titre">Gestion de la plateforme</h2>
+
+  <div class="menu-grid">
+
+    @for(menu of menus; track menu.titre){
+
+    <div
+      class="menu-card"
+      (click)="naviguer(menu.route)"
+      [style.borderTop]="'6px solid '+menu.couleur">
+
+      <div
+        class="icon"
+        [style.background]="menu.couleur">
+
+        {{menu.icone}}
+
+      </div>
+
+      <h3>{{menu.titre}}</h3>
+
+      <p>{{menu.description}}</p>
+
+    </div>
+
+    }
+
+  </div>
+
+</div>

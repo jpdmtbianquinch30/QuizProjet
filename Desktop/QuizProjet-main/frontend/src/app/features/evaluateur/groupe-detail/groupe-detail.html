@@ -1,0 +1,104 @@
+<div class="container">
+
+  <div class="header">
+    <h1>{{ groupe?.nom || 'Groupe' }}</h1>
+    <button class="btn-annuler" (click)="retour()">← Retour aux groupes</button>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  @if (chargement) {
+    <p class="texte-info">Chargement...</p>
+  } @else {
+
+    <div class="card">
+      <h2>Informations générales</h2>
+
+      @if (succesInfos) {
+        <div class="succes">{{ succesInfos }}</div>
+      }
+
+      <div class="form-group">
+        <label>Nom du groupe *</label>
+        <input type="text" [(ngModel)]="nom" />
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="description" rows="3"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-primary" (click)="enregistrerInfos()" [disabled]="enregistrementInfos">
+          {{ enregistrementInfos ? 'Enregistrement...' : 'Enregistrer' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Questionnaire assigné</h2>
+
+      @if (succesAssignation) {
+        <div class="succes">{{ succesAssignation }}</div>
+      }
+
+      @if (questionnaires.length === 0) {
+        <p class="texte-info">Vous n'avez encore créé aucun questionnaire.</p>
+      } @else {
+        <div class="form-row-inline">
+          <select [(ngModel)]="questionnaireSelectionneId">
+            <option [ngValue]="null">-- Aucun --</option>
+            @for (q of questionnaires; track q.id) {
+              <option [ngValue]="q.id">{{ q.titre }}</option>
+            }
+          </select>
+          <button class="btn-primary" (click)="assignerQuestionnaire()" [disabled]="assignationEnCours || !questionnaireSelectionneId">
+            {{ assignationEnCours ? 'Assignation...' : 'Assigner' }}
+          </button>
+        </div>
+      }
+
+      @if (groupe?.questionnaireAssigneTitre) {
+        <p class="questionnaire-actuel">
+          📝 Actuellement assigné : <strong>{{ groupe?.questionnaireAssigneTitre }}</strong>
+        </p>
+      }
+    </div>
+
+    <div class="card">
+      <h2>Apprenants ({{ groupe?.apprenants?.length || 0 }})</h2>
+
+      @if (erreurAjout) {
+        <div class="erreur">{{ erreurAjout }}</div>
+      }
+
+      <div class="form-row-inline">
+        <input type="email" [(ngModel)]="emailApprenant"
+               placeholder="Email de l'apprenant (ex: jean@gmail.com)" />
+        <button class="btn-primary" (click)="ajouterApprenant()" [disabled]="ajoutEnCours">
+          {{ ajoutEnCours ? 'Ajout...' : '+ Ajouter' }}
+        </button>
+      </div>
+
+      @if (!groupe?.apprenants || groupe!.apprenants.length === 0) {
+        <p class="texte-info">Aucun apprenant dans ce groupe pour le moment.</p>
+      } @else {
+        <ul class="liste-apprenants">
+          @for (apprenant of groupe!.apprenants; track apprenant.id) {
+            <li>
+              <div class="apprenant-info">
+                <span class="apprenant-nom">{{ apprenant.prenom }} {{ apprenant.nom }}</span>
+                <span class="apprenant-email">{{ apprenant.email }}</span>
+              </div>
+              <button class="btn-retirer" (click)="retirerApprenant(apprenant.id)">Retirer</button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+  }
+
+</div>

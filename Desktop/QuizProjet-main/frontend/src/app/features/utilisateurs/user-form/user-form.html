@@ -1,0 +1,102 @@
+<div class="page">
+
+  <div class="card">
+
+    <div class="header">
+
+      <div class="icon">
+        👤
+      </div>
+
+      <div>
+
+        <h2>Créer un utilisateur</h2>
+
+        <p>
+          Ajouter un administrateur ou un évaluateur à la plateforme.
+        </p>
+
+      </div>
+
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+
+        <label>Nom complet</label>
+
+        <input
+          type="text"
+          formControlName="nom"
+          placeholder="Nom de l'utilisateur">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Adresse email</label>
+
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="exemple@email.com">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Mot de passe</label>
+
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="********">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Rôle</label>
+
+        <select formControlName="role">
+
+          <option value="ADMIN">
+            👑 Administrateur
+          </option>
+
+          <option value="EVALUATEUR">
+            🎓 Évaluateur
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          class="cancel"
+          routerLink="/admin/utilisateurs">
+
+          Annuler
+
+        </button>
+
+        <button
+          class="save"
+          type="submit"
+          [disabled]="form.invalid">
+
+          ➕ Créer le compte
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

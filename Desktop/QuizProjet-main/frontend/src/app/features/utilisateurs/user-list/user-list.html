@@ -1,0 +1,147 @@
+<div class="page">
+
+    <div class="header">
+
+        <div>
+
+            <h1>👥 Gestion des utilisateurs</h1>
+
+            <p>
+                Administrateurs et évaluateurs de la plateforme.
+            </p>
+
+        </div>
+
+        <button class="btn-add" (click)="addUser()">
+            ➕ Nouvel utilisateur
+        </button>
+
+    </div>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Nom</th>
+
+                    <th>Email</th>
+
+                    <th>Rôle</th>
+
+                    <th>Statut</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let user of users">
+
+                    <td>
+
+                        <div class="user">
+
+                            <div class="avatar">
+                                {{user.nom.charAt(0)}}
+                            </div>
+
+                            {{user.nom}}
+
+                        </div>
+
+                    </td>
+
+                    <td>{{user.email}}</td>
+
+                    <td>
+
+                        <span
+                            class="badge"
+                            [ngClass]="{
+                                admin:user.role=='ADMIN',
+                                eval:user.role=='EVALUATEUR',
+                                userRole:user.role=='USER'
+                            }">
+
+                            {{user.role}}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status"
+                            [ngClass]="user.actif ? 'active':'inactive'">
+
+                            {{user.actif ? 'Actif':'Inactif'}}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="edit"
+                                (click)="editUser(user.id)">
+
+                                ✏️
+
+                            </button>
+
+                            <button
+                                class="delete"
+                                (click)="deleteUser(user.id)">
+
+                                🗑️
+
+                            </button>
+
+                            <button
+                                class="enable"
+                                (click)="activer(user.id)">
+
+                                ✔
+
+                            </button>
+
+                            <button
+                                class="disable"
+                                (click)="desactiver(user.id)">
+
+                                ✖
+
+                            </button>
+
+                            <button
+                                class="reset"
+                                (click)="resetPassword(user.id)">
+
+                                🔑
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+
+  <h2>Archives des questionnaires</h2>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Thème</th>
+        <th>Créé par</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let q of archives">
+
+        <td>{{ q.titre }}</td>
+        <td>{{ q.theme }}</td>
+        <td>{{ q.creePar }}</td>
+
+        <td>
+          <button (click)="restaurer(q.id)">Restaurer</button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

@@ -1,0 +1,313 @@
+.page{
+
+    padding:40px;
+
+    background:#f5f7fb;
+
+    min-height:100vh;
+
+}
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:32px;
+
+}
+
+.header p{
+
+    color:#666;
+
+}
+
+.btn-add{
+
+    background:#4f46e5;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-add:hover{
+
+    background:#4338ca;
+
+}
+
+.table-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#eef2ff;
+
+}
+
+th{
+
+    padding:18px;
+
+    text-align:left;
+
+    color:#555;
+
+}
+
+td{
+
+    padding:18px;
+
+    border-top:1px solid #eee;
+
+}
+
+tbody tr{
+
+    transition:.2s;
+
+}
+
+tbody tr:hover{
+
+    background:#fafafa;
+
+}
+
+.user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#4f46e5;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+}
+
+.badge{
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.admin{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+.eval{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.userRole{
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+.status{
+
+    padding:7px 15px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+.active{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.inactive{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.actions button{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:16px;
+
+}
+
+.edit{
+
+    background:#dbeafe;
+
+}
+
+.edit:hover{
+
+    background:#93c5fd;
+
+}
+
+.delete{
+
+    background:#fee2e2;
+
+}
+
+.delete:hover{
+
+    background:#fecaca;
+
+}
+
+.enable{
+
+    background:#dcfce7;
+
+}
+
+.enable:hover{
+
+    background:#bbf7d0;
+
+}
+
+.disable{
+
+    background:#fef3c7;
+
+}
+
+.disable:hover{
+
+    background:#fde68a;
+
+}
+
+.reset{
+
+    background:#ede9fe;
+
+}
+
+.reset:hover{
+
+    background:#ddd6fe;
+
+}
+
+@media(max-width:900px){
+
+.table-card{
+
+overflow:auto;
+
+}
+
+table{
+
+min-width:950px;
+
+}
+
+}

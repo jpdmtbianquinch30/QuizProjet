@@ -1,0 +1,84 @@
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h1>Questionnaires</h1>
+      <p>Bienvenue, <strong>{{ getNom() }}</strong></p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-primary" (click)="nouveau()">
+        + Nouveau questionnaire
+      </button>
+      <button class="btn-logout" (click)="logout()">
+        Déconnexion
+      </button>
+    </div>
+  </div>
+
+  <!-- ERREUR -->
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  <!-- CHARGEMENT -->
+  @if (chargement) {
+    <div class="chargement">Chargement...</div>
+  }
+
+  <!-- LISTE VIDE -->
+  @if (!chargement && questionnaires.length === 0) {
+    <div class="vide">
+      <p>Aucun questionnaire créé.</p>
+      <button class="btn-primary" (click)="nouveau()">
+        Créer le premier questionnaire
+      </button>
+    </div>
+  }
+
+  <!-- TABLE -->
+  @if (!chargement && questionnaires.length > 0) {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Thème</th>
+            <th>Durée</th>
+            <th>Questions</th>
+            <th>Statut</th>
+            <th>Créé par</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (q of questionnaires; track q.id) {
+            <tr>
+              <td>{{ q.id }}</td>
+              <td><strong>{{ q.titre }}</strong></td>
+              <td>{{ q.theme }}</td>
+              <td>{{ formatDuree(q.dureeSecondes) }}</td>
+              <td>{{ q.nombreQuestions }}</td>
+              <td>
+                <span [class]="'badge ' + getStatutClass(q.statut)">
+                  {{ q.statut }}
+                </span>
+              </td>
+              <td>{{ q.createdByNom }}</td>
+              <td class="actions">
+                <button class="btn-edit" (click)="modifier(q.id)">
+                  Modifier
+                </button>
+                <button class="btn-delete" (click)="supprimer(q.id)">
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</div>

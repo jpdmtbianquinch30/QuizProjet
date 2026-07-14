@@ -1,0 +1,59 @@
+<div class="container">
+
+  <h2>Supervision des questionnaires</h2>
+
+  <!-- FILTRES -->
+  <div class="filters">
+
+    <select [(ngModel)]="selectedStatut" (change)="filterByStatut()">
+      <option value="TOUS">Tous</option>
+      <option value="PUBLIE">Publié</option>
+      <option value="BROUILLON">Brouillon</option>
+      <option value="ARCHIVE">Archivé</option>
+    </select>
+
+    <input
+      type="text"
+      [(ngModel)]="searchTheme"
+      placeholder="Recherche par thème"
+    />
+
+    <button (click)="search()">Rechercher</button>
+
+  </div>
+
+  <!-- TABLE -->
+  <table>
+
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Thème</th>
+        <th>Créé par</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let q of questionnaires">
+
+        <td>{{ q.titre }}</td>
+        <td>{{ q.theme }}</td>
+        <td>{{ q.creePar }}</td>
+        <td>{{ q.statut }}</td>
+
+        <td>
+          <button (click)="voir(q.id)">Voir</button>
+
+          <button (click)="archiver(q.id)" *ngIf="q.statut !== 'ARCHIVE'">
+            Archiver
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
