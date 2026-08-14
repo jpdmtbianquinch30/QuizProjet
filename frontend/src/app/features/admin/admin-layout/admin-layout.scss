@@ -1,0 +1,108 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: inherit;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #1e293b;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  .sidebar-brand {
+  padding: 26px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--isi-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(180deg, var(--isi-blue-light) 0%, transparent 100%);
+  h2 { margin: 0; font-size: 1.15rem; color: var(--isi-blue); font-weight: 800; letter-spacing: -0.01em; }
+}
+
+  .sidebar-menu {
+    flex: 1;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .menu-item {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: var(--isi-text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.18s ease;
+
+  .icon { margin-right: 12px; font-size: 1.1rem; }
+
+  &:hover {
+    background-color: var(--isi-blue-light);
+    color: var(--isi-blue);
+    transform: translateX(2px);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, var(--isi-blue), var(--isi-blue-dark));
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(11, 94, 215, 0.25);
+  }
+
+  &.logout {
+    color: var(--isi-danger);
+    margin-top: auto;
+    &:hover { background-color: #fef2f2; color: var(--isi-danger); transform: none; }
+  }
+}
+
+  .sidebar-footer {
+    padding: 15px 0;
+    border-top: 1px solid #334155;
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  min-width: 0;
+}
+
+.top-navbar {
+  height: 60px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  border-bottom: 1px solid #e2e8f0;
+
+  .user-profile {
+    font-size: 0.9rem;
+    color: #4a5568;
+  }
+}
+
+.content-body {
+  flex: 1;
+  padding: 2rem;
+}

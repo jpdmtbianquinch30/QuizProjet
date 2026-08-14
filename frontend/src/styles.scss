@@ -1,0 +1,23 @@
+:root {
+  /* Charte easyQuizz — ISI (fond blanc, accent bleu) */
+  --isi-blue: #0b5ed7;
+  --isi-blue-dark: #084bb0;
+  --isi-blue-light: #eaf2ff;
+  --isi-blue-soft: #dbe9ff;
+  --isi-bg: #ffffff;
+  --isi-surface: #ffffff;
+  --isi-text: #12203a;
+  --isi-text-muted: #5b6b85;
+  --isi-border: #dbe4f3;
+  --isi-danger: #dc2626;
+  --isi-success: #16a34a;
+  --isi-warning: #d97706;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--isi-text);
+  background: var(--isi-bg);
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--isi-bg); font-family: 'Inter', sans-serif; }
+button, input, textarea, select { font: inherit; }
+h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.01em; }

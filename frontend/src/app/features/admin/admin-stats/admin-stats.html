@@ -1,0 +1,52 @@
+<div class="page">
+
+  <div class="page-header">
+    <h1>Tableau de bord</h1>
+    <p>Vue d'ensemble de la plateforme</p>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  @if (chargement) {
+    <p class="texte-info">Chargement des statistiques...</p>
+  } @else if (stats) {
+
+    <div class="cartes-stats">
+      <div class="carte-stat">
+        <div class="carte-icone" style="background: linear-gradient(135deg, #eaf2ff, #dbe9ff);">🎓</div>
+        <div>
+          <div class="carte-valeur">{{ stats.totalApprenants }}</div>
+          <div class="carte-label">Apprenants</div>
+        </div>
+      </div>
+
+      <div class="carte-stat">
+        <div class="carte-icone" style="background: linear-gradient(135deg, #dbe9ff, #bfdbfe);">🧑‍🏫</div>
+        <div>
+          <div class="carte-valeur">{{ stats.totalEvaluateurs }}</div>
+          <div class="carte-label">Évaluateurs</div>
+        </div>
+      </div>
+
+      <div class="carte-stat">
+        <div class="carte-icone" style="background: linear-gradient(135deg, #eaf2ff, #93c5fd);">📝</div>
+        <div>
+          <div class="carte-valeur">{{ stats.totalQuestionnaires }}</div>
+          <div class="carte-label">Questionnaires ({{ stats.totalQuestionnairesPublies }} publiés)</div>
+        </div>
+      </div>
+
+      <div class="carte-stat">
+        <div class="carte-icone" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0);">🏆</div>
+        <div>
+          <div class="carte-valeur">{{ stats.tauxReussiteGlobal }}%</div>
+          <div class="carte-label">Taux de réussite global</div>
+        </div>
+      </div>
+    </div>
+
+  }
+
+</div>
