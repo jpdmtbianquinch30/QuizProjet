@@ -37,7 +37,7 @@ export class DashboardComponent {
   route: '/evaluateur/classement'
 },
   {
-  titre: 'Groupes d\'apprenants',
+  titre: 'Classe ',
   description: 'Créer des classes et leur assigner des questionnaires',
   icone: '👥',
   couleur: '#10b981',

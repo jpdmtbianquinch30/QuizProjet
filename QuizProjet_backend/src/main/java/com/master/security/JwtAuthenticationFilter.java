@@ -1,7 +1,6 @@
 package com.master.security;
 
 import com.master.service.JwtService;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -60,21 +57,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 if (jwtService.isTokenValid(jwt, userDetails)) {
 
-                    // Extraire le rôle depuis le token
-                    Claims claims = jwtService.extractAllClaims(jwt);
-                    String role = claims.get("role", String.class);
-
-                    List<SimpleGrantedAuthority> authorities = role != null
-                            ? List.of(new SimpleGrantedAuthority("ROLE_" + role))
-                            : List.copyOf(userDetails.getAuthorities().stream()
-                            .map(a -> new SimpleGrantedAuthority(a.getAuthority()))
-                            .toList());
-
+                    // IMPORTANT : on utilise le rôle actuel chargé depuis la base
+                    // (userDetails.getAuthorities()), et non le claim "role" figé
+                    // dans le token au moment de sa génération. Sinon, si le rôle
+                    // d'un utilisateur change en base (ex: USER -> EVALUATEUR),
+                    // ses anciens tokens continuent de porter l'ancien rôle et
+                    // toutes ses requêtes sont rejetées avec un 403 tant qu'il
+                    // ne se reconnecte pas.
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
                                     null,
-                                    authorities
+                                    userDetails.getAuthorities()
                             );
                     authToken.setDetails(
                             new WebAuthenticationDetailsSource()
