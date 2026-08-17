@@ -32,4 +32,12 @@ export class QuestionnaireService {
   supprimer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+<<<<<<< HEAD
 }
+=======
+
+  changerStatut(id: number, statut: 'BROUILLON' | 'PUBLIE' | 'ARCHIVE'): Observable<QuestionnaireResponse> {
+    return this.http.put<QuestionnaireResponse>(`${this.API}/${id}/statut`, { statut });
+  }
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

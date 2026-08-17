@@ -1,11 +1,19 @@
 <div class="quiz-play-container" *ngIf="!chargement && questionnaire">
   <div class="timer" [class.alerte]="tempsRestant <= 10">
+<<<<<<< HEAD
     ⏱ {{ minutesSecondes }}
+=======
+    ⏱ Question : {{ minutesSecondes }}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   </div>
 
   <h2>{{ questionnaire.titre }}</h2>
   <p class="progression">
+<<<<<<< HEAD
     Question {{ indexActuel + 1 }} / {{ questionnaire.questions.length }}
+=======
+    Question {{ indexActuel + 1 }} / {{ questionnaire.questions.length }} · {{ questionCourante?.dureeSecondes }} secondes
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   </p>
 
   <div class="question" *ngIf="questionCourante">
@@ -38,4 +46,8 @@
 </div>
 
 <div class="info" *ngIf="chargement">Chargement du quiz...</div>
+<<<<<<< HEAD
 <div class="erreur" *ngIf="erreur">{{ erreur }}</div>
+=======
+<div class="erreur" *ngIf="erreur">{{ erreur }}</div>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

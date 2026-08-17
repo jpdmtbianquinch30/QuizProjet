@@ -40,6 +40,7 @@
                 rows="3"></textarea>
     </div>
 
+<<<<<<< HEAD
     <div class="form-row">
       <div class="form-group">
         <label>Durée (secondes) *</label>
@@ -53,6 +54,11 @@
           <option value="ARCHIVE">Archivé</option>
         </select>
       </div>
+=======
+    <div class="form-group">
+      <label for="q-duree">Durée (secondes) *</label>
+      <input id="q-duree" type="number" [(ngModel)]="questionnaire.dureeSecondes" min="30" />
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     </div>
   </div>
 
@@ -89,12 +95,25 @@
 
       <div class="form-row">
         <div class="form-group">
+<<<<<<< HEAD
           <label>Points</label>
           <input type="number" [(ngModel)]="question.points" min="1" />
         </div>
         <div class="form-group">
           <label>Bonne réponse</label>
           <select [(ngModel)]="question.bonneReponseIndex">
+=======
+          <label [attr.for]="'q-points-' + i">Points</label>
+          <input [id]="'q-points-' + i" type="number" [(ngModel)]="question.points" min="1" />
+        </div>
+        <div class="form-group">
+          <label [attr.for]="'q-duree-' + i">Durée de la question (secondes)</label>
+          <input [id]="'q-duree-' + i" type="number" [(ngModel)]="question.dureeSecondes" min="5" />
+        </div>
+        <div class="form-group">
+          <label [attr.for]="'q-bonne-' + i">Bonne réponse</label>
+          <select [id]="'q-bonne-' + i" [(ngModel)]="question.bonneReponseIndex" aria-label="Bonne réponse">
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
             <option [value]="0">Choix A</option>
             <option [value]="1">Choix B</option>
             <option [value]="2">Choix C</option>
@@ -152,12 +171,21 @@
 
         <div class="form-row">
           <div class="form-group">
+<<<<<<< HEAD
             <label>Nombre de questions *</label>
             <input type="number" [(ngModel)]="iaNombreQuestions" min="1" max="20" />
           </div>
           <div class="form-group">
             <label>Niveau *</label>
             <select [(ngModel)]="iaNiveau">
+=======
+            <label for="ia-nombre">Nombre de questions *</label>
+            <input id="ia-nombre" type="number" [(ngModel)]="iaNombreQuestions" min="1" max="20" />
+          </div>
+          <div class="form-group">
+            <label for="ia-niveau">Niveau *</label>
+            <select id="ia-niveau" [(ngModel)]="iaNiveau" aria-label="Niveau de difficulté">
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
               <option value="FACILE">Facile</option>
               <option value="MOYEN">Moyen</option>
               <option value="DIFFICILE">Difficile</option>

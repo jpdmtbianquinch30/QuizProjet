@@ -91,6 +91,16 @@
   font-size: 0.9rem;
 }
 
+<<<<<<< HEAD
+=======
+.questionnaires-draggables { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
+.questionnaire-draggable { cursor: grab; border: 1px solid #bfdbfe; background: #eff6ff; color: #1d4ed8; padding: .6rem .8rem; border-radius: 8px; }
+.questionnaire-draggable small { color: #64748b; margin-left: .35rem; }
+.zone-depot { border: 2px dashed #2563eb; background: #eff6ff; color: #1d4ed8; padding: 1.2rem; text-align: center; border-radius: 8px; font-weight: 600; }
+.btn-publier { border: none; background: #16a34a; color: white; padding: .75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.btn-publier:disabled { opacity: .6; cursor: not-allowed; }
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 .liste-apprenants {
   list-style: none;
   padding: 0;
@@ -171,4 +181,8 @@
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

@@ -70,7 +70,12 @@ export class QuestionnaireFormComponent implements OnInit {
             choix: [...q.choix],
             bonneReponseIndex: q.bonneReponseIndex,
             points: q.points,
+<<<<<<< HEAD
             ordre: q.ordre
+=======
+            ordre: q.ordre,
+            dureeSecondes: q.dureeSecondes ?? 30
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
           }))
         };
       },
@@ -84,7 +89,12 @@ export class QuestionnaireFormComponent implements OnInit {
       choix: ['', '', '', ''],
       bonneReponseIndex: 0,
       points: 1,
+<<<<<<< HEAD
       ordre: this.questionnaire.questions.length + 1
+=======
+      ordre: this.questionnaire.questions.length + 1,
+      dureeSecondes: 30
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     });
   }
 
@@ -108,8 +118,14 @@ export class QuestionnaireFormComponent implements OnInit {
         this.chargement = false;
         setTimeout(() => this.router.navigate(['/evaluateur/questionnaires']), 1500);
       },
+<<<<<<< HEAD
       error: () => {
         this.erreur = 'Erreur lors de la sauvegarde';
+=======
+      error: (err) => {
+        console.error('Erreur création/modification questionnaire :', err.status, err.error);
+        this.erreur = `Erreur lors de la sauvegarde (${err.status}) : ${typeof err.error === 'string' ? err.error : JSON.stringify(err.error)}`;
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         this.chargement = false;
       }
     });
@@ -132,7 +148,11 @@ export class QuestionnaireFormComponent implements OnInit {
   }
 
   annuler(): void {
+<<<<<<< HEAD
     this.router.navigate(['/admin/questionnaires']);
+=======
+    this.router.navigate(['/evaluateur/questionnaires']);
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   }
 
   // ===== Génération IA =====
@@ -179,7 +199,12 @@ export class QuestionnaireFormComponent implements OnInit {
         const decalage = this.questionnaire.questions.length;
         const nouvelles = res.questions.map((q, i) => ({
           ...q,
+<<<<<<< HEAD
           ordre: decalage + i + 1
+=======
+          ordre: decalage + i + 1,
+          dureeSecondes: 30
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         }));
 
         this.questionnaire.questions.push(...nouvelles);

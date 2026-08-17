@@ -38,7 +38,18 @@ public class Question {
     @Column(name = "ordre")
     private Integer ordre;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "questionnaire_id", nullable = false)
     private Questionnaire questionnaire;
 }
+=======
+    @Column(name = "duree_secondes", nullable = false)
+    @Builder.Default
+    private Integer dureeSecondes = 30;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionnaire_id", nullable = false)
+    private Questionnaire questionnaire;
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

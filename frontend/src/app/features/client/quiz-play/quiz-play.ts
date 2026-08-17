@@ -25,6 +25,10 @@ export class QuizPlay implements OnInit, OnDestroy {
   verifications: ({ correcte: boolean; bonneReponseIndex: number } | null)[] = [];
 
   tempsRestant = 0;
+<<<<<<< HEAD
+=======
+  private tempsParQuestion: number[] = [];
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   private timerId: any;
   soumissionEnCours = false;
 
@@ -42,7 +46,12 @@ export class QuizPlay implements OnInit, OnDestroy {
         this.questionnaire.questions.sort((a, b) => a.ordre - b.ordre);
         this.reponses = new Array(data.questions.length).fill(null);
         this.verifications = new Array(data.questions.length).fill(null);
+<<<<<<< HEAD
         this.tempsRestant = data.dureeSecondes;
+=======
+        this.tempsParQuestion = data.questions.map(q => q.dureeSecondes ?? 30);
+        this.tempsRestant = this.tempsParQuestion[0];
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         this.chargement = false;
         this.demarrerTimer();
       },
@@ -67,9 +76,17 @@ export class QuizPlay implements OnInit, OnDestroy {
   private demarrerTimer(): void {
     this.timerId = setInterval(() => {
       this.tempsRestant--;
+<<<<<<< HEAD
       if (this.tempsRestant <= 0) {
         this.arreterTimer();
         this.soumettre();
+=======
+      this.tempsParQuestion[this.indexActuel] = this.tempsRestant;
+      if (this.tempsRestant <= 0) {
+        this.tempsRestant = 0;
+        this.arreterTimer();
+        this.tempsEcoule();
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
       }
     }, 1000);
   }
@@ -125,11 +142,22 @@ export class QuizPlay implements OnInit, OnDestroy {
   suivant(): void {
     if (this.questionnaire && this.indexActuel < this.questionnaire.questions.length - 1) {
       this.indexActuel++;
+<<<<<<< HEAD
+=======
+      this.reinitialiserTimerQuestion();
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     }
   }
 
   precedent(): void {
+<<<<<<< HEAD
     if (this.indexActuel > 0) this.indexActuel--;
+=======
+    if (this.indexActuel > 0) {
+      this.indexActuel--;
+      this.reinitialiserTimerQuestion();
+    }
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   }
 
   get estDerniereQuestion(): boolean {
@@ -160,4 +188,23 @@ export class QuizPlay implements OnInit, OnDestroy {
         },
       });
   }
+<<<<<<< HEAD
 }
+=======
+
+  private reinitialiserTimerQuestion(): void {
+    this.arreterTimer();
+    this.tempsRestant = this.tempsParQuestion[this.indexActuel] ?? 0;
+    this.demarrerTimer();
+  }
+
+  private tempsEcoule(): void {
+    if (this.estDerniereQuestion) {
+      this.soumettre();
+      return;
+    }
+    this.indexActuel++;
+    this.reinitialiserTimerQuestion();
+  }
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

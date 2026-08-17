@@ -34,6 +34,10 @@ export class GroupeDetailComponent implements OnInit {
   questionnaireSelectionneId: number | null = null;
   assignationEnCours = false;
   succesAssignation = '';
+<<<<<<< HEAD
+=======
+  questionnaireGlisseId: number | null = null;
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
   constructor(
     private groupeService: GroupeService,
@@ -149,7 +153,40 @@ export class GroupeDetailComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   retour(): void {
     this.router.navigate(['/evaluateur/groupes']);
   }
 }
+=======
+  debutGlisser(questionnaireId: number, event: DragEvent): void {
+    this.questionnaireGlisseId = questionnaireId;
+    event.dataTransfer?.setData('questionnaireId', questionnaireId.toString());
+  }
+
+  deposerQuestionnaire(event: DragEvent): void {
+    event.preventDefault();
+    const id = Number(event.dataTransfer?.getData('questionnaireId')) || this.questionnaireGlisseId;
+    if (!id) return;
+    this.questionnaireSelectionneId = id;
+    this.assignerQuestionnaire();
+    this.questionnaireGlisseId = null;
+  }
+
+  publierEtAssigner(): void {
+    if (!this.questionnaireSelectionneId) return;
+    this.assignationEnCours = true;
+    this.questionnaireService.changerStatut(this.questionnaireSelectionneId, 'PUBLIE').subscribe({
+      next: () => this.assignerQuestionnaire(),
+      error: () => {
+        this.erreur = 'Impossible de publier ce questionnaire';
+        this.assignationEnCours = false;
+      }
+    });
+  }
+
+  retour(): void {
+    this.router.navigate(['/evaluateur/groupes']);
+  }
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

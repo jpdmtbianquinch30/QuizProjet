@@ -26,9 +26,21 @@ public class CustomUserDetailsService implements UserDetailsService {
                         new UsernameNotFoundException(
                                 "Utilisateur non trouvé : " + email));
 
+<<<<<<< HEAD
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
+=======
+        boolean actif = user.getActif() == null || user.getActif();
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                actif,        // enabled
+                true,         // accountNonExpired
+                true,         // credentialsNonExpired
+                true,         // accountNonLocked
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                 List.of(new SimpleGrantedAuthority(
                         "ROLE_" + user.getRole().name()))
         );

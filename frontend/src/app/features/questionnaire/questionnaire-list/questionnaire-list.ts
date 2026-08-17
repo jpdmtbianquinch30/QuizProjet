@@ -17,6 +17,10 @@ export class QuestionnaireListComponent implements OnInit {
   questionnaires: QuestionnaireResponse[] = [];
   chargement = true;
   erreur = '';
+<<<<<<< HEAD
+=======
+  idStatutEnCours: number | null = null;
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
   constructor(
     private questionnaireService: QuestionnaireService,
@@ -59,6 +63,25 @@ export class QuestionnaireListComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
+=======
+  changerStatut(questionnaire: QuestionnaireResponse, statut: 'BROUILLON' | 'PUBLIE'): void {
+    this.idStatutEnCours = questionnaire.id;
+    this.erreur = '';
+    this.questionnaireService.changerStatut(questionnaire.id, statut).subscribe({
+      next: reponse => {
+        questionnaire.statut = reponse.statut;
+        this.idStatutEnCours = null;
+      },
+      error: (err) => {
+        console.error('Erreur changement statut :', err.status, err.error);
+        this.erreur = `Impossible de modifier le statut (${err.status}) : ${typeof err.error === 'string' ? err.error : JSON.stringify(err.error)}`;
+        this.idStatutEnCours = null;
+      }
+    });
+  }
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   logout(): void {
     this.authService.logout();
   }

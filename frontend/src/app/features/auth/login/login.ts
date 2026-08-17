@@ -26,7 +26,11 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           if (res.role === 'ADMIN') {
+<<<<<<< HEAD
            this.router.navigate(['/admin-dashboard']);
+=======
+           this.router.navigate(['/admin']);
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
           } else if (res.role === 'EVALUATEUR') {
              this.router.navigate(['/evaluateur']);
           } else if (res.role === 'USER') {
@@ -46,4 +50,8 @@ export class LoginComponent {
   allerRegister(): void {
     this.router.navigate(['/register']);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

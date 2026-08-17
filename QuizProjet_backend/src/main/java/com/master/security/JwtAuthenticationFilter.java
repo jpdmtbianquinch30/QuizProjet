@@ -1,7 +1,10 @@
 package com.master.security;
 
 import com.master.service.JwtService;
+<<<<<<< HEAD
 import io.jsonwebtoken.Claims;
+=======
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+<<<<<<< HEAD
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+=======
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -18,7 +24,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
 @Slf4j
 @Component
@@ -60,6 +69,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 if (jwtService.isTokenValid(jwt, userDetails)) {
 
+<<<<<<< HEAD
                     // Extraire le rôle depuis le token
                     Claims claims = jwtService.extractAllClaims(jwt);
                     String role = claims.get("role", String.class);
@@ -70,11 +80,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                             .map(a -> new SimpleGrantedAuthority(a.getAuthority()))
                             .toList());
 
+=======
+                    // IMPORTANT : on utilise le rôle actuel chargé depuis la base
+                    // (userDetails.getAuthorities()), et non le claim "role" figé
+                    // dans le token au moment de sa génération. Sinon, si le rôle
+                    // d'un utilisateur change en base (ex: USER -> EVALUATEUR),
+                    // ses anciens tokens continuent de porter l'ancien rôle et
+                    // toutes ses requêtes sont rejetées avec un 403 tant qu'il
+                    // ne se reconnecte pas.
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
                                     null,
+<<<<<<< HEAD
                                     authorities
+=======
+                                    userDetails.getAuthorities()
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                             );
                     authToken.setDetails(
                             new WebAuthenticationDetailsSource()

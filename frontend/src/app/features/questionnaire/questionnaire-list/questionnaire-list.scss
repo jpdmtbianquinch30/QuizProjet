@@ -103,6 +103,21 @@ table {
   &:hover { background: #4338ca; }
 }
 
+<<<<<<< HEAD
+=======
+.btn-publish, .btn-draft {
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.btn-publish { background: #16a34a; color: white; }
+.btn-draft { background: #fef3c7; color: #92400e; }
+.btn-publish:disabled, .btn-draft:disabled { opacity: .6; cursor: not-allowed; }
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 .btn-delete {
   background: #dc2626;
   color: white;
@@ -126,4 +141,15 @@ table {
   text-align: center;
   padding: 3rem;
   color: #666;
+<<<<<<< HEAD
+=======
+}
+.table-container {
+  box-shadow: 0 4px 16px rgba(11, 94, 215, 0.08);
+}
+
+tbody tr {
+  transition: background 0.15s ease;
+  &:hover { background: var(--isi-blue-light); }
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 }

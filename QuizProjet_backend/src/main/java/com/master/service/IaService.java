@@ -147,6 +147,10 @@ public class IaService {
             dto.setBonneReponseIndex(node.path("bonneReponseIndex").asInt(0));
             dto.setPoints(node.path("points").asInt(1));
             dto.setOrdre(node.path("ordre").asInt(ordre));
+<<<<<<< HEAD
+=======
+            dto.setDureeSecondes(node.path("dureeSecondes").asInt(30));
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
             ordre++;
 
             questions.add(dto);

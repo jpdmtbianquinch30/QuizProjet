@@ -1,0 +1,62 @@
+<div class="page">
+
+  <div class="page-header">
+    <h1>Gestion des apprenants</h1>
+    <p>{{ apprenants.length }} apprenant(s) inscrit(s)</p>
+  </div>
+
+  @if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  }
+
+  @if (chargement) {
+    <p class="texte-info">Chargement...</p>
+  } @else if (apprenants.length === 0) {
+    <p class="texte-info">Aucun apprenant inscrit pour le moment.</p>
+  } @else {
+    <div class="carte-tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Score moyen</th>
+            <th>Quiz complétés</th>
+            <th>Statut</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (a of apprenants; track a.id) {
+            <tr>
+              <td class="nom">{{ a.prenom }} {{ a.nom }}</td>
+              <td class="email">{{ a.email }}</td>
+              <td>
+                <span class="badge-score"
+                      [class.bon]="a.scoreMoyen >= 70"
+                      [class.moyen]="a.scoreMoyen >= 40 && a.scoreMoyen < 70"
+                      [class.faible]="a.scoreMoyen < 40 && a.quizCompletes > 0">
+                  {{ a.quizCompletes > 0 ? a.scoreMoyen + '%' : '—' }}
+                </span>
+              </td>
+              <td>{{ a.quizCompletes }} / {{ a.totalQuizAssignes }}</td>
+              <td>
+                <span class="badge-statut" [class.actif]="a.actif" [class.bloque]="!a.actif">
+                  {{ a.actif ? 'Actif' : 'Bloqué' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn-toggle" [class.debloquer]="!a.actif"
+                        (click)="changerStatut(a)"
+                        [disabled]="idEnCours === a.id">
+                  {{ idEnCours === a.id ? '...' : (a.actif ? 'Bloquer' : 'Débloquer') }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</div>

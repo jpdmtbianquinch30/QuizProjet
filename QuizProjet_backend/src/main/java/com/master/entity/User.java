@@ -29,6 +29,13 @@ public class User {
     @Builder.Default
     private Role role = Role.USER;
 
+<<<<<<< HEAD
+=======
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean actif = true;
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 

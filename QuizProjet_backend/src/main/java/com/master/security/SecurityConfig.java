@@ -44,6 +44,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/questionnaires/**").hasAnyRole("EVALUATEUR", "ADMIN")
                         .requestMatchers("/api/scores/**").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
                         .requestMatchers("/api/questions/*/verifier").hasAnyRole("USER", "EVALUATEUR", "ADMIN")
+<<<<<<< HEAD
+=======
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

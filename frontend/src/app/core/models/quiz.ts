@@ -5,6 +5,10 @@ export interface QuestionDTO {
   bonneReponseIndex: number | null;   // null quand renvoyé à l'apprenant
   points: number;
   ordre: number;
+<<<<<<< HEAD
+=======
+  dureeSecondes: number;
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 }
 
 export interface QuestionnaireRequest {
@@ -46,4 +50,8 @@ export interface ScoreResponse {
   scoreMax: number;
   pourcentage: number;
   dateSoumission: string;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

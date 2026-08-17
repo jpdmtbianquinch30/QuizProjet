@@ -144,6 +144,10 @@ public class QuestionnaireService {
                 .bonneReponseIndex(dto.getBonneReponseIndex())
                 .points(dto.getPoints() != null ? dto.getPoints() : 1)
                 .ordre(dto.getOrdre())
+<<<<<<< HEAD
+=======
+                .dureeSecondes(dto.getDureeSecondes() != null ? dto.getDureeSecondes() : 30)
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                 .questionnaire(q)
                 .build();
     }
@@ -158,6 +162,10 @@ public class QuestionnaireService {
                         .bonneReponseIndex(question.getBonneReponseIndex())
                         .points(question.getPoints())
                         .ordre(question.getOrdre())
+<<<<<<< HEAD
+=======
+                        .dureeSecondes(question.getDureeSecondes())
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                         .build())
                 .collect(Collectors.toList());
 
@@ -186,6 +194,16 @@ public class QuestionnaireService {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public QuestionnaireResponse changerStatut(Long id, String statut) {
+        Questionnaire questionnaire = questionnaireRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Questionnaire non trouvé : " + id));
+        questionnaire.setStatut(parseStatut(statut));
+        return toResponse(questionnaireRepository.save(questionnaire));
+    }
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     // ============ LISTER LES QUESTIONNAIRES ASSIGNÉS À UN APPRENANT ============
     @Transactional(readOnly = true)
     public List<QuestionnaireResponse> listerAssignes(Long apprenantId) {
@@ -228,4 +246,8 @@ public class QuestionnaireService {
         }
         return response;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

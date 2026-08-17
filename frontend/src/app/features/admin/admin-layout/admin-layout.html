@@ -1,0 +1,40 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>⚡ easyQuizz Admin</h2>
+    </div>
+
+    <nav class="sidebar-menu">
+      <a routerLink="/admin/stats" routerLinkActive="active" class="menu-item">
+        <span class="icon">📊</span> Tableau de bord
+      </a>
+      <a routerLink="/admin/apprenants" routerLinkActive="active" class="menu-item">
+        <span class="icon">🎓</span> Apprenants
+      </a>
+      <a routerLink="/admin/evaluateurs" routerLinkActive="active" class="menu-item">
+        <span class="icon">🧑‍🏫</span> Évaluateurs
+      </a>
+      <a routerLink="/admin/questionnaires" routerLinkActive="active" class="menu-item">
+        <span class="icon">📝</span> Questionnaires
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="menu-item logout" (click)="deconnexion()">
+        <span class="icon">🚪</span> Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-navbar">
+      <div class="user-profile">
+        Bienvenue, <strong>{{ nomAdmin || 'Admin' }}</strong>
+      </div>
+    </header>
+
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

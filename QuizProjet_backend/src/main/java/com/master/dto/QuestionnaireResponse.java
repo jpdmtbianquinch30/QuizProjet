@@ -30,5 +30,11 @@ public class QuestionnaireResponse {
         private Integer bonneReponseIndex;
         private Integer points;
         private Integer ordre;
+<<<<<<< HEAD
     }
 }
+=======
+        private Integer dureeSecondes;
+    }
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

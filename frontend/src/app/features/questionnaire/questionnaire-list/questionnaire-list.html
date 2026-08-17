@@ -67,6 +67,18 @@
               </td>
               <td>{{ q.createdByNom }}</td>
               <td class="actions">
+<<<<<<< HEAD
+=======
+                @if (q.statut !== 'PUBLIE') {
+                  <button class="btn-publish" (click)="changerStatut(q, 'PUBLIE')" [disabled]="idStatutEnCours === q.id">
+                    {{ idStatutEnCours === q.id ? '...' : 'Publier' }}
+                  </button>
+                } @else {
+                  <button class="btn-draft" (click)="changerStatut(q, 'BROUILLON')" [disabled]="idStatutEnCours === q.id">
+                    {{ idStatutEnCours === q.id ? '...' : 'Dépublier' }}
+                  </button>
+                }
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
                 <button class="btn-edit" (click)="modifier(q.id)">
                   Modifier
                 </button>

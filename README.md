@@ -87,6 +87,7 @@ CREATE DATABASE quiz_db;
 cd QuizProjet_backend
 ```
 
+<<<<<<< HEAD
 Modifier `src/main/resources/application.properties` (adapter le mot de passe PostgreSQL) :
 
 ```properties
@@ -106,6 +107,14 @@ Définir la variable d'environnement avec ta clé Groq avant de lancer le backen
 
 **PowerShell (Windows) :**
 ```powershell
+=======
+Les secrets ne sont pas enregistrés dans le projet. Définir les variables d'environnement avant de lancer le backend :
+
+**PowerShell (Windows) :**
+```powershell
+$env:DB_PASSWORD="TON_MOT_DE_PASSE_POSTGRES"
+$env:JWT_SECRET="UneCleJWTUniqueDAuMoins32CaracteresPourLaProduction"
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 $env:IA_API_KEY="gsk_ta_cle_ici"
 ```
 

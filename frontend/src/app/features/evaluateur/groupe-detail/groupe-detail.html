@@ -1,8 +1,13 @@
 <div class="container">
 
   <div class="header">
+<<<<<<< HEAD
     <h1>{{ groupe?.nom || 'Groupe' }}</h1>
     <button class="btn-annuler" (click)="retour()">← Retour aux groupes</button>
+=======
+    <h1>{{ groupe?.nom || 'Classe' }}</h1>
+    <button class="btn-annuler" (click)="retour()">← Retour aux classes</button>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   </div>
 
   @if (erreur) {
@@ -21,6 +26,7 @@
       }
 
       <div class="form-group">
+<<<<<<< HEAD
         <label>Nom du groupe *</label>
         <input type="text" [(ngModel)]="nom" />
       </div>
@@ -29,6 +35,16 @@
         <label>Description</label>
         <textarea [(ngModel)]="description" rows="3"></textarea>
       </div>
+=======
+  <label for="classe-nom">Nom de la classe *</label>
+  <input id="classe-nom" type="text" [(ngModel)]="nom" />
+</div>
+
+      <div class="form-group">
+  <label for="classe-desc">Description</label>
+  <textarea id="classe-desc" [(ngModel)]="description" rows="3"></textarea>
+</div>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
       <div class="form-actions">
         <button class="btn-primary" (click)="enregistrerInfos()" [disabled]="enregistrementInfos">
@@ -38,7 +54,11 @@
     </div>
 
     <div class="card">
+<<<<<<< HEAD
       <h2>Questionnaire assigné</h2>
+=======
+      <h2>Questionnaire assigné à la classe</h2>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
       @if (succesAssignation) {
         <div class="succes">{{ succesAssignation }}</div>
@@ -48,7 +68,11 @@
         <p class="texte-info">Vous n'avez encore créé aucun questionnaire.</p>
       } @else {
         <div class="form-row-inline">
+<<<<<<< HEAD
           <select [(ngModel)]="questionnaireSelectionneId">
+=======
+          <select [(ngModel)]="questionnaireSelectionneId" aria-label="Questionnaire à assigner">
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
             <option [ngValue]="null">-- Aucun --</option>
             @for (q of questionnaires; track q.id) {
               <option [ngValue]="q.id">{{ q.titre }}</option>
@@ -57,6 +81,24 @@
           <button class="btn-primary" (click)="assignerQuestionnaire()" [disabled]="assignationEnCours || !questionnaireSelectionneId">
             {{ assignationEnCours ? 'Assignation...' : 'Assigner' }}
           </button>
+<<<<<<< HEAD
+=======
+          <button class="btn-publier" (click)="publierEtAssigner()" [disabled]="assignationEnCours || !questionnaireSelectionneId">
+            Publier et assigner
+          </button>
+        </div>
+        <p class="texte-info">Ou glissez un questionnaire dans la zone ci-dessous.</p>
+        <div class="questionnaires-draggables">
+          @for (q of questionnaires; track q.id) {
+            <div class="questionnaire-draggable" draggable="true"
+                 (dragstart)="debutGlisser(q.id, $event)">
+              📝 {{ q.titre }} <small>{{ q.statut }}</small>
+            </div>
+          }
+        </div>
+        <div class="zone-depot" (dragover)="$event.preventDefault()" (drop)="deposerQuestionnaire($event)">
+          Déposez ici le questionnaire à assigner à cette classe
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         </div>
       }
 
@@ -68,7 +110,11 @@
     </div>
 
     <div class="card">
+<<<<<<< HEAD
       <h2>Apprenants ({{ groupe?.apprenants?.length || 0 }})</h2>
+=======
+      <h2>Apprenants de la classe ({{ groupe?.apprenants?.length || 0 }})</h2>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
       @if (erreurAjout) {
         <div class="erreur">{{ erreurAjout }}</div>
@@ -101,4 +147,8 @@
 
   }
 
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

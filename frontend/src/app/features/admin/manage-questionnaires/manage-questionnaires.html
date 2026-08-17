@@ -1,0 +1,30 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Gestion des questionnaires</h1>
+    <p>Consultez tous les questionnaires et archivez ceux qui ne doivent plus être proposés.</p>
+  </div>
+
+  @if (chargement) {
+    <p class="texte-info">Chargement...</p>
+  } @else if (erreur) {
+    <div class="erreur">{{ erreur }}</div>
+  } @else if (questionnaires.length === 0) {
+    <p class="texte-info">Aucun questionnaire disponible.</p>
+  } @else {
+    <div class="carte-tableau">
+      <table>
+        <thead><tr><th>Titre</th><th>Thème</th><th>Créé par</th><th>Questions</th><th>Statut</th><th></th></tr></thead>
+        <tbody>
+          @for (q of questionnaires; track q.id) {
+            <tr>
+              <td class="nom">{{ q.titre }}</td><td>{{ q.theme }}</td><td>{{ q.createdByNom }}</td>
+              <td>{{ q.nombreQuestions }}</td>
+              <td><span class="badge-statut" [class.actif]="q.statut === 'PUBLIE'" [class.bloque]="q.statut === 'ARCHIVE'">{{ q.statut }}</span></td>
+              <td><button class="btn-toggle" (click)="archiver(q)" [disabled]="q.statut === 'ARCHIVE' || idEnCours === q.id">{{ idEnCours === q.id ? '...' : q.statut === 'ARCHIVE' ? 'Archivé' : 'Archiver' }}</button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -42,6 +42,7 @@
 }
 
 .groupe-carte {
+<<<<<<< HEAD
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
@@ -53,6 +54,10 @@
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+=======
+  &:hover {
+    box-shadow: 0 14px 32px rgba(11, 94, 215, 0.14);
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   }
 }
 

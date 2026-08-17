@@ -22,11 +22,19 @@ export class QuizResult implements OnInit {
     this.score = state?.score ?? null;
 
     if (!this.score) {
+<<<<<<< HEAD
       this.router.navigate(['/client/quiz-list']);
+=======
+      this.router.navigate(['/client/liste']);
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     }
   }
 
   retour(): void {
     this.router.navigate(['/client/liste']);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

@@ -14,6 +14,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Map;
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
 
 @RestController
 @RequestMapping("/api/questionnaires")
@@ -44,10 +48,17 @@ public class QuestionnaireController {
     public ResponseEntity<List<QuestionnaireResponse>> listerTous(
             Authentication authentication) {
 
+<<<<<<< HEAD
         String role = authentication.getAuthorities()
                 .stream().findFirst().get().getAuthority();
 
         if (role.equals("ROLE_ADMIN")) {
+=======
+        boolean estAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (estAdmin) {
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
             // ADMIN voit tous les questionnaires
             return ResponseEntity.ok(questionnaireService.listerTous());
         } else {
@@ -75,6 +86,17 @@ public class QuestionnaireController {
         return ResponseEntity.ok(questionnaireService.modifier(id, request));
     }
 
+<<<<<<< HEAD
+=======
+    // PUT /api/questionnaires/{id}/statut — publication rapide depuis la liste
+    @PutMapping("/{id}/statut")
+    @PreAuthorize("hasAnyRole('EVALUATEUR', 'ADMIN')")
+    public ResponseEntity<QuestionnaireResponse> changerStatut(
+            @PathVariable Long id, @RequestBody Map<String, String> request) {
+        return ResponseEntity.ok(questionnaireService.changerStatut(id, request.get("statut")));
+    }
+
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     // GET /api/questionnaires/assignes — questionnaires assignés à l'apprenant connecté
     @GetMapping("/assignes")
     @PreAuthorize("hasRole('USER')")
@@ -119,10 +141,17 @@ public class QuestionnaireController {
             @RequestParam String theme,
             Authentication authentication) {
 
+<<<<<<< HEAD
         String role = authentication.getAuthorities()
                 .stream().findFirst().get().getAuthority();
 
         if (role.equals("ROLE_ADMIN")) {
+=======
+        boolean estAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (estAdmin) {
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
             return ResponseEntity.ok(
                     questionnaireService.rechercherParTheme(theme));
         } else {

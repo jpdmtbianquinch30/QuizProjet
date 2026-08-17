@@ -1,10 +1,17 @@
 <div class="container">
 
   <div class="header">
+<<<<<<< HEAD
     <h1>Groupes d'apprenants</h1>
     <div class="header-actions">
       <button class="btn-primary" (click)="ouvrirModaleCreation()">
         + Nouveau groupe
+=======
+    <h1>Classes d'apprenants</h1>
+    <div class="header-actions">
+      <button class="btn-primary" (click)="ouvrirModaleCreation()">
+        + Nouvelle classe
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
       </button>
       <button class="btn-annuler" (click)="retour()">← Retour</button>
     </div>
@@ -18,8 +25,13 @@
     <p class="texte-info">Chargement...</p>
   } @else if (groupes.length === 0) {
     <div class="vide">
+<<<<<<< HEAD
       <p>Vous n'avez encore créé aucun groupe.</p>
       <button class="btn-primary" (click)="ouvrirModaleCreation()">+ Créer mon premier groupe</button>
+=======
+      <p>Vous n'avez encore créé aucune classe.</p>
+      <button class="btn-primary" (click)="ouvrirModaleCreation()">+ Créer ma première classe</button>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
     </div>
   } @else {
     <div class="groupes-grid">
@@ -48,7 +60,11 @@
     <div class="modale-overlay" (click)="fermerModaleCreation()">
       <div class="modale" (click)="$event.stopPropagation()">
         <div class="modale-header">
+<<<<<<< HEAD
           <h2>Nouveau groupe</h2>
+=======
+          <h2>Nouvelle classe</h2>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
           <button class="btn-fermer" (click)="fermerModaleCreation()">✕</button>
         </div>
 
@@ -57,14 +73,23 @@
         }
 
         <div class="form-group">
+<<<<<<< HEAD
           <label>Nom du groupe *</label>
           <input type="text" [(ngModel)]="nouveauNom" placeholder="Ex: Promo 2026 - Groupe A" />
+=======
+          <label>Nom de la classe *</label>
+          <input type="text" [(ngModel)]="nouveauNom" placeholder="Ex: Promo 2026 - Classe A" />
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         </div>
 
         <div class="form-group">
           <label>Description</label>
           <textarea [(ngModel)]="nouvelleDescription" rows="3"
+<<<<<<< HEAD
                     placeholder="Description du groupe..."></textarea>
+=======
+                    placeholder="Description de la classe..."></textarea>
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
         </div>
 
         <div class="modale-actions">

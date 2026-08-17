@@ -37,8 +37,13 @@ export class DashboardComponent {
   route: '/evaluateur/classement'
 },
   {
+<<<<<<< HEAD
   titre: 'Groupes d\'apprenants',
   description: 'Créer des groupes et leur assigner des questionnaires',
+=======
+  titre: 'Classe ',
+  description: 'Créer des classes et leur assigner des questionnaires',
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
   icone: '👥',
   couleur: '#10b981',
   route: '/evaluateur/groupes'
@@ -56,4 +61,8 @@ export class DashboardComponent {
   logout(): void {
     this.authService.logout();
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6

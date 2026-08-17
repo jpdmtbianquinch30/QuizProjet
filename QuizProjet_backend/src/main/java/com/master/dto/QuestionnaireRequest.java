@@ -33,5 +33,13 @@ public class QuestionnaireRequest {
         private Integer bonneReponseIndex;
         private Integer points;
         private Integer ordre;
+<<<<<<< HEAD
     }
 }
+=======
+        @NotNull(message = "La durée de la question est obligatoire")
+        @Min(value = 5, message = "Durée minimum 5 secondes")
+        private Integer dureeSecondes;
+    }
+}
+>>>>>>> 5df926eac586ed031ba21f3cb97d6613cc36c7e6
