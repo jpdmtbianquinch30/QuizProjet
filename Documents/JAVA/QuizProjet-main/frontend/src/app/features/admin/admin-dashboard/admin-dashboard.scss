@@ -1,0 +1,151 @@
+/* ... styles existants ... */
+
+// Onglets
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    color: #666;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+
+    &.active {
+      background: #1a1a2e;
+      color: white;
+    }
+  }
+}
+
+// Contenu des onglets
+.tab-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+// Carte des paramètres
+.settings-card {
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #1a1a2e;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: #333;
+    }
+
+    input[type="text"], input[type="url"] {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    input[type="color"] {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .color-picker-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .color-hex {
+        font-family: monospace;
+        font-size: 0.9rem;
+        color: #555;
+      }
+    }
+
+    small {
+      display: block;
+      color: #d9534f;
+      margin-top: 0.3rem;
+    }
+
+    &.checkbox-group {
+      display: flex;
+      align-items: center;
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      background: #1a1a2e;
+      color: white;
+      border: none;
+      padding: 0.7rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover:not(:disabled) {
+        background: #2d2d4a;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    .spinner {
+      color: #1a1a2e;
+    }
+  }
+
+  .success-message {
+    color: #28a745;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  .error-message {
+    color: #dc3545;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+}

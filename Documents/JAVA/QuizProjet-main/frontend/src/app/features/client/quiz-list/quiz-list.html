@@ -1,0 +1,31 @@
+<div class="quiz-container">
+  <button class="btn-retour" (click)="retour()">← Retour</button>
+  <h1 class="page-title">Mes questionnaires</h1>
+  <p class="page-subtitle">Les quiz qui vous ont été assignés</p>
+
+  <div *ngIf="chargement" class="info">Chargement...</div>
+  <div *ngIf="erreur" class="erreur">{{ erreur }}</div>
+  <div *ngIf="!chargement && questionnaires.length === 0" class="info">
+    Aucun questionnaire ne vous a été assigné pour le moment.
+  </div>
+
+  <div class="cards">
+    <div class="card" *ngFor="let q of questionnaires">
+      <h3>{{ q.titre }}</h3>
+      <span class="theme">{{ q.theme }}</span>
+      <p>{{ q.description }}</p>
+      <div class="meta">
+        <span>{{ q.nombreQuestions }} questions</span>
+        <span>{{ q.dureeSecondes }}s</span>
+      </div>
+
+      <div *ngIf="dejaComplete(q.id)" class="deja-fait">
+        ✓ Terminé — {{ scoreObtenu(q.id)?.scoreObtenu }} / {{ scoreObtenu(q.id)?.scoreMax }}
+      </div>
+
+      <button [disabled]="dejaComplete(q.id)" (click)="demarrer(q.id)">
+        {{ dejaComplete(q.id) ? 'Quiz déjà complété' : 'Démarrer le quiz' }}
+      </button>
+    </div>
+  </div>
+</div>

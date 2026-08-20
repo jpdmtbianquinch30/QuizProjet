@@ -1,0 +1,37 @@
+/* Variables globales — valeurs par défaut (fallback) */
+:root {
+  --primary-color: #0b5ed7;   /* sera écrasé par la config */
+  --secondary-color: #2ecc71; /* sera écrasé par la config */
+
+  /* Variables dérivées pour la charte (utilisées dans le layout admin) */
+  --isi-blue: var(--primary-color);
+  --isi-blue-dark: #084bb0; /* peut rester fixe ou utiliser une variation */
+  --isi-blue-light: color-mix(in srgb, var(--primary-color) 20%, white);
+  --isi-blue-soft: color-mix(in srgb, var(--primary-color) 10%, white);
+  --isi-text-muted: #5b6b85;
+  --isi-border: #dbe4f3;
+  --isi-danger: #dc2626;
+  --isi-success: #16a34a;
+  --isi-warning: #d97706;
+  --isi-bg: #ffffff;
+  --isi-surface: #ffffff;
+  --isi-text: #12203a;
+}
+
+/* Styles globaux */
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--isi-bg); font-family: 'Inter', sans-serif; }
+
+/* Classes utilitaires pour les boutons */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  &:hover { background-color: color-mix(in srgb, var(--primary-color) 80%, black); }
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: white;
+  &:hover { background-color: color-mix(in srgb, var(--secondary-color) 80%, black); }
+}

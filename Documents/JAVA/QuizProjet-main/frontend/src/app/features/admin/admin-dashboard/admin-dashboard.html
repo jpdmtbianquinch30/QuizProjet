@@ -1,0 +1,75 @@
+<div class="admin-container">
+ 
+
+  <!-- Menu d'onglets -->
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="currentTab === 'dashboard'" (click)="switchTab('dashboard')">📊 Tableau de bord</button>
+    <button class="tab-btn" [class.active]="currentTab === 'settings'" (click)="switchTab('settings')">⚙️ Paramètres</button>
+  </div>
+
+ 
+    
+
+    <!-- Onglet Paramètres -->
+    <div *ngIf="currentTab === 'settings'" class="tab-content">
+      <div class="settings-card">
+        <h2>Configuration de la plateforme</h2>
+        <form [formGroup]="configForm" (ngSubmit)="saveConfig()">
+          <div class="form-group">
+            <label>Nom de la plateforme</label>
+            <input formControlName="platformName" type="text" placeholder="Ex: Quiz Masters 2026">
+            <small *ngIf="configForm.get('platformName')?.invalid && configForm.get('platformName')?.touched">
+              Le nom est obligatoire.
+            </small>
+          </div>
+
+          <div class="form-group color-group">
+            <label>Couleur primaire</label>
+            <div class="color-picker-wrapper">
+              <input formControlName="primaryColor" type="color" (input)="onColorChange('primaryColor', $event)">
+              <span class="color-hex">{{ configForm.get('primaryColor')?.value }}</span>
+            </div>
+            <small *ngIf="configForm.get('primaryColor')?.invalid && configForm.get('primaryColor')?.touched">
+              Format hexadécimal invalide (ex: #ff0000)
+            </small>
+          </div>
+
+          <div class="form-group color-group">
+            <label>Couleur secondaire</label>
+            <div class="color-picker-wrapper">
+              <input formControlName="secondaryColor" type="color" (input)="onColorChange('secondaryColor', $event)">
+              <span class="color-hex">{{ configForm.get('secondaryColor')?.value }}</span>
+            </div>
+            <small *ngIf="configForm.get('secondaryColor')?.invalid && configForm.get('secondaryColor')?.touched">
+              Format hexadécimal invalide (ex: #00ff00)
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label>URL du logo</label>
+            <input formControlName="logoUrl" type="text" placeholder="https://exemple.com/logo.png">
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label>
+              <input formControlName="maintenanceMode" type="checkbox">
+              Mode maintenance (désactive l'accès aux utilisateurs)
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" [disabled]="configForm.invalid || saving">Sauvegarder</button>
+            <span *ngIf="saving" class="spinner">⏳ Sauvegarde...</span>
+          </div>
+
+          <div *ngIf="saveSuccess" class="success-message">
+            ✅ Configuration sauvegardée avec succès !
+          </div>
+          <div *ngIf="saveError" class="error-message">
+            ❌ Erreur lors de la sauvegarde. Veuillez réessayer.
+          </div>
+        </form>
+      </div>
+    
+  </div>
+</div>

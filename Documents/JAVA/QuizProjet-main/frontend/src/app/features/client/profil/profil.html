@@ -1,0 +1,83 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Mon profil</h1>
+    <button class="btn-annuler" (click)="retour()">← Retour</button>
+  </div>
+
+  @if (chargement) {
+    <p class="chargement-texte">Chargement...</p>
+  } @else {
+
+    <!-- ===== Infos générales ===== -->
+    <div class="card">
+      <h2>Informations générales</h2>
+
+      @if (erreurInfos) {
+        <div class="erreur">{{ erreurInfos }}</div>
+      }
+      @if (succesInfos) {
+        <div class="succes">{{ succesInfos }}</div>
+      }
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [value]="email" disabled />
+        <small>L'email ne peut pas être modifié</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom *</label>
+          <input type="text" [(ngModel)]="nom" placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" [(ngModel)]="prenom" placeholder="Votre prénom" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-primary" (click)="enregistrerInfos()" [disabled]="enregistrementInfos">
+          {{ enregistrementInfos ? 'Enregistrement...' : 'Enregistrer' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== Changer le mot de passe ===== -->
+    <div class="card">
+      <h2>Changer le mot de passe</h2>
+
+      @if (erreurMdp) {
+        <div class="erreur">{{ erreurMdp }}</div>
+      }
+      @if (succesMdp) {
+        <div class="succes">{{ succesMdp }}</div>
+      }
+
+      <div class="form-group">
+        <label>Mot de passe actuel *</label>
+        <input type="password" [(ngModel)]="ancienMotDePasse" placeholder="••••••••" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nouveau mot de passe *</label>
+          <input type="password" [(ngModel)]="nouveauMotDePasse" placeholder="Min. 6 caractères" />
+        </div>
+        <div class="form-group">
+          <label>Confirmation *</label>
+          <input type="password" [(ngModel)]="confirmationMotDePasse" placeholder="••••••••" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-primary" (click)="changerMotDePasse()" [disabled]="enregistrementMdp">
+          {{ enregistrementMdp ? 'Modification...' : 'Changer le mot de passe' }}
+        </button>
+      </div>
+    </div>
+
+  }
+
+</div>
